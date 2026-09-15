@@ -1,173 +1,298 @@
-# React + TypeScript + Vite
+# DevNotes
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**Learn. Build. Share.**
 
-Currently, two official plugins are available:
+DevNotes is a full-stack developer learning and blogging platform designed to help developers learn programming concepts, explore practical tutorials, test their knowledge through quizzes, and engage with developer-focused content.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+* 📚 **Developer Articles** — Read practical articles covering web development and programming.
+* 🎥 **Video Tutorials** — Learn through structured tutorials and video lessons.
+* 🧠 **Quizzes** — Test your understanding with interactive programming quizzes.
+* 🤖 **AI Assistant** — Get programming explanations and learning support.
+* 🔐 **Authentication** — Secure user registration and login using JWT authentication.
+* 👤 **User Profiles** — Manage your profile and account information.
+* 🛠️ **Admin Dashboard** — Manage platform content and users.
+* 🌙 **Dark Mode** — Switch between light and dark themes.
+* 🔎 **Search** — Find relevant articles and learning content.
+* 📱 **Responsive Design** — Designed to work across desktop, tablet, and mobile devices.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the Oxlint configuration
+### Frontend
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* React Router
+* HTML5
+* CSS3
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### Backend
+
+* Node.js
+* Express.js
+* TypeScript
+* MongoDB
+* Mongoose
+* JWT Authentication
+
+### Development Tools
+
+* Git
+* GitHub
+* pnpm
+* npm
+* VS Code
+* GitHub Copilot
+* AI-assisted development tools
+
+## 📁 Project Structure
+
+```text
+DevNotes/
+├── src/
+│   ├── components/
+│   ├── context/
+│   ├── pages/
+│   ├── routes/
+│   ├── services/
+│   ├── types/
+│   ├── hooks/
+│   ├── constants/
+│   ├── utils/
+│   └── main.tsx
+│
+├── server/
+│   └── src/
+│       ├── controllers/
+│       ├── models/
+│       ├── routes/
+│       ├── services/
+│       ├── middleware/
+│       └── scripts/
+│
+├── public/
+├── package.json
+└── README.md
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## ⚙️ Getting Started
 
+### Prerequisites
 
+Make sure you have installed:
 
+* Node.js
+* pnpm
+* MongoDB
 
-mkdir src\constants src\context src\data src\hooks src\pages src\routes src\services src\styles src\types src\utils
-  ### Chatgbt guide
+### 1. Clone the repository
 
-How We'll Code
+```bash
+git clone https://github.com/ADEYINKE-30/DevNotes.git
+cd DevNotes
+```
 
-From this point on, I don't want to just give you code.
+### 2. Install frontend dependencies
 
-Instead, we'll work like this:
+```bash
+pnpm install
+```
 
-Plan the component.
-Discuss why we need it.
-Design its API (props).
-Implement it together.
-Test it.
-Refactor if needed.
-Commit it to Git.
+### 3. Install backend dependencies
 
-This will help you build confidence and understand the reasoning behind each decision.
+```bash
+cd server
+npm install
+```
 
-✅ Your Next Task
-Create the remaining folders listed above.
-Tell me when they're done.
+### 4. Configure environment variables
 
-Then we'll build our first reusable React + TypeScript component together: a flexible Button that we'll reuse throughout the entire blog application. It's a small component, but it will introduce many of the React and TypeScript patterns you'll use repeatedly in this project. 🚀
+Create a `.env` file inside the `server` directory.
 
-C:\Users\USER PC\Desktop\Blog_App>dir src\constants
- Volume in drive C has no label.
- Volume Serial Number is 2401-5F1A
+Add the required environment variables for your local development environment.
 
- Directory of C:\Users\USER PC\Desktop\Blog_App\src
+> Do not commit your `.env` file to GitHub.
 
-File Not Found
+### 5. Seed the database
 
-You're very close! The command you ran is checking whether the folder exists—it doesn't create it.
+From the `server` directory:
 
-You ran:
+```bash
+npm run seed:posts
+npm run seed:tutorials
+npm run seed:quizzes
+npm run seed:demo-users
+```
 
-dir src\constants
+### 6. Start the backend
 
-dir means list the contents of a directory. Since constants doesn't exist yet, Windows correctly responded with:
+```bash
+npm run dev
+```
 
-File Not Found
-Let's create the folders
+The backend runs on:
 
-From your project root (C:\Users\USER PC\Desktop\Blog_App), run:
+```text
+http://localhost:5000
+```
 
-mkdir src\constants
-mkdir src\context
-mkdir src\data
-mkdir src\hooks
-mkdir src\pages
-mkdir src\routes
-mkdir src\services
-mkdir src\styles
-mkdir src\types
-mkdir src\utils
+### 7. Start the frontend
 
-Or, if you prefer, create them all in one command:
+Open another terminal in the project root:
 
-mkdir src\constants src\context src\data src\hooks src\pages src\routes src\services src\styles src\types src\utils
-Verify they were created
+```bash
+pnpm run dev
+```
 
-Run:
+The frontend will be available through the Vite development server.
 
-dir src
+## 🔐 Authentication
 
-You should see something similar to:
+DevNotes uses JWT-based authentication.
 
-src
-│
-├── assets
-├── components
-├── constants
-├── context
-├── data
-├── hooks
-├── pages
-├── routes
-├── services
-├── styles
-├── types
-├── utils
-├── App.tsx
-├── index.css
-└── main.tsx
-A small suggestion before we go further
+Users can:
 
-Since this project is going to become part of your portfolio, I'd like us to make it feel like a real software project rather than a tutorial.
+* Create an account
+* Log in
+* Update their profile
+* Change their password
+* Log out securely
 
-Here's how we'll work:
+The application also includes separate user roles for regular users and administrators.
 
-Sprint 1: Setup and architecture.
-Sprint 2: Design system (colors, typography, reusable components).
-Sprint 3: Layout (Header, Footer, Navigation).
-Sprint 4: Pages and routing.
-Sprint 5: Blog functionality.
-Sprint 6: Polish, accessibility, and deployment.
+## 📚 Articles
 
-We'll make Git commits after each completed feature, so by the end you'll also have a clean commit history that demonstrates your development process.
+DevNotes provides developer-focused articles designed to explain programming concepts in a practical and beginner-friendly way.
 
-Once you've created the remaining folders and confirmed they appear under src, we'll start building our first reusable component: a professional Button using React, TypeScript, and CSS Modules.
+Articles can include:
 
+* Programming concepts
+* Code examples
+* Practical explanations
+* Development best practices
+* Web development topics
 
+## 🎥 Tutorials
 
-Sprint 1 Completed (Foundation)
+The tutorial section provides structured learning content with multiple lessons and video resources.
 
-Here's what we've accomplished:
+The current platform includes:
 
-✅ React + TypeScript + Vite project
-✅ pnpm setup
-✅ Organized folder structure
-✅ Ready for development
+* 5 tutorials
+* 30 lessons
 
-From this point onward, everything we build will fit into this architecture.
+## 🧠 Quizzes
 
+DevNotes includes interactive quizzes that allow users to test their understanding of programming topics.
 
-styles/
-├── globals.css
-├── reset.css
-├── variables.css
-└── typography.css
-reset.css – Removes browser default inconsistencies.
-variables.css – Defines colors, spacing, border radii, shadows, and transitions using CSS variables.
-typography.css – Defines font sizes, line heights, and heading styles.
-globals.css – Imports the other style files and sets global styles.
+The current database includes:
 
-## Contact email setup
+* 3 quizzes
+* 21 questions
 
-The contact form now stores messages in Firestore and sends a real email through EmailJS.
+Users can start quizzes, submit answers, and view their results.
 
-Add these values to your local `.env` file before using the form:
+## 🤖 AI Assistant
 
-- `VITE_EMAILJS_SERVICE_ID`
-- `VITE_EMAILJS_TEMPLATE_ID`
-- `VITE_EMAILJS_PUBLIC_KEY`
+DevNotes includes an AI-powered learning assistant designed to help users understand programming concepts.
 
-Messages are still logged to Firestore even if email delivery fails, so no contact request is lost.
+The assistant can provide explanations about topics such as:
+
+* HTML
+* CSS
+* JavaScript
+* TypeScript
+* React
+* Tailwind CSS
+* Git
+* GitHub
+* Node.js
+* Express.js
+* MongoDB
+* REST APIs
+* Debugging
+* Responsive web design
+
+The application supports external AI providers through environment configuration and also includes an offline fallback mode for development.
+
+## 🛡️ Admin Features
+
+Administrators have access to protected management functionality for platform administration.
+
+Admin functionality includes management areas for:
+
+* Users
+* Articles
+* Tutorials
+* Quizzes
+* Platform content
+
+## 🧪 Build
+
+To verify the frontend production build:
+
+```bash
+pnpm run build
+```
+
+To verify the backend build:
+
+```bash
+cd server
+npm run build
+```
+
+## 🔒 Security
+
+Environment variables containing secrets and credentials should never be committed to the repository.
+
+The project uses `.gitignore` to exclude sensitive and generated files such as:
+
+```text
+.env
+.env.example
+node_modules/
+dist/
+```
+
+For deployment, use secure environment variables provided by your hosting platform.
+
+## 🎯 Project Goal
+
+DevNotes was created to provide a simple and practical learning environment for developers.
+
+The goal is to make technical learning more approachable by combining:
+
+**Learning → Practice → Testing → Support**
+
+Users can learn through articles and tutorials, test their knowledge with quizzes, and use the AI assistant when they need additional explanations.
+
+## 🚧 Future Improvements
+
+Possible future improvements include:
+
+* More developer tutorials
+* More quizzes and questions
+* Expanded AI capabilities
+* Community discussions
+* Bookmarks and personalized learning
+* Improved admin analytics
+* Deployment and production infrastructure
+* Additional developer resources
+
+## 👨🏽‍💻 Author
+
+**Adepoju Adeyinka**
+
+Software Developer
+
+Lagos, Nigeria
+
+* GitHub: [ADEYINKE-30](https://github.com/ADEYINKE-30)
+
+## 📄 License
+
+This project was created as a software development portfolio and learning project.
