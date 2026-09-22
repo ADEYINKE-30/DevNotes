@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import SearchBar from "../../search/SearchBar";
 import UserMenu from "../../auth/UserMenu";
 import Notifications from "./Notifications.tsx";
+import { notificationService } from "../../../services/notificationService";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -16,6 +17,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
   const [showNotifications, setShowNotifications] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const notifRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -39,45 +41,57 @@ const Header = ({ onMenuClick }: HeaderProps) => {
     return () => document.removeEventListener("mousedown", handleDocClick);
   }, []);
 
+  useEffect(() => {
+    notificationService.getUnreadCount().then(setUnreadCount).catch(() => setUnreadCount(0));
+  }, [showNotifications]);
+
   return (
-    <header className="border-b border-slate-200 dark:border-slate-700 bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-900 dark:to-slate-800">
-      <div className="flex items-center justify-between gap-4 px-6 py-4">
+    <header className="border-b border-line bg-surface">
+      <div className="flex min-h-16 items-center justify-between gap-3 px-4 py-3 sm:px-6">
         {/* Left: Menu button (mobile) + Search */}
-        <div className="flex items-center gap-4 flex-1">
+        <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
           <button
             onClick={onMenuClick}
-            className="rounded-lg p-2 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 md:hidden"
-            title="Toggle sidebar"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-control text-content-secondary transition-colors hover:bg-canvas hover:text-content focus-visible:outline-none md:hidden"
+            title="Open navigation"
+            aria-label="Open navigation"
           >
-            <span className="text-xl">☰</span>
+            <span aria-hidden="true" className="text-lg leading-none">☰</span>
           </button>
-          <div className="flex-1 max-w-md">
+          <div className="min-w-0 max-w-md flex-1">
             <SearchBar />
           </div>
         </div>
 
         {/* Right: Theme + Notifications + User Menu */}
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           {/* Theme Toggle */}
           <button
             onClick={() => setIsDarkMode((v) => !v)}
-            className="rounded-lg p-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-control text-content-secondary transition-colors hover:bg-canvas hover:text-content focus-visible:outline-none"
             title="Toggle theme"
+            aria-label={isDarkMode ? "Switch to light theme" : "Switch to dark theme"}
             aria-pressed={isDarkMode}
           >
-            {isDarkMode ? "🌙" : "☀️"}
+            <span aria-hidden="true">{isDarkMode ? "Moon" : "Sun"}</span>
           </button>
 
           {/* Notifications */}
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setShowNotifications((s) => !s)}
-              className="relative rounded-lg p-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              className="relative inline-flex h-9 w-9 items-center justify-center rounded-control text-content-secondary transition-colors hover:bg-canvas hover:text-content focus-visible:outline-none"
               title="Notifications"
+              aria-label="Notifications"
               aria-expanded={showNotifications}
+              aria-haspopup="dialog"
             >
-              🔔
-              <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500" />
+              <span aria-hidden="true">Bell</span>
+              {unreadCount > 0 && (
+                <span className="absolute right-0 top-0 min-w-4 rounded-full bg-error px-1 text-center text-[10px] leading-4 text-white">
+                  {unreadCount > 9 ? "9+" : unreadCount}
+                </span>
+              )}
             </button>
 
             <Notifications open={showNotifications} onClose={() => setShowNotifications(false)} />

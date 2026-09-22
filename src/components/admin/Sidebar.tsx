@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 const adminLinks = [
   { path: "/admin", label: "Dashboard", icon: "📊" },
   { path: "/admin/articles", label: "Articles", icon: "📝" },
+  { path: "/admin/videos", label: "Videos", icon: "🎥" },
   { path: "/admin/users", label: "Users", icon: "👥" },
   { path: "/admin/quizzes", label: "Quizzes", icon: "🧪" },
   { path: "/admin/analytics", label: "Analytics", icon: "📈" },

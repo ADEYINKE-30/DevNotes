@@ -50,7 +50,7 @@ export const useAIChat = (): UseAIChatReturn => {
     } finally {
       setIsTyping(false);
     }
-  }, []);
+  }, [conversationId]);
 
   const clearMessages = useCallback(() => {
     setMessages([

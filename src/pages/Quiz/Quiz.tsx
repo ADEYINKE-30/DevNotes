@@ -89,7 +89,7 @@ const Quiz = () => {
     try {
       setError("");
       const response = await quizService.startQuiz(quiz._id);
-      setAttemptId(response.attempt._id);
+      setAttemptId(response.attemptId);
       setPhase("in-progress");
       setCurrentQuestion(0);
       setAnswers(new Array(questions.length).fill(null));
@@ -384,13 +384,7 @@ const Quiz = () => {
           </div>
 
           <QuizQuestion
-            question={{
-              id: questions[currentQuestion]._id,
-              question: questions[currentQuestion].question,
-              options: questions[currentQuestion].options,
-              correctAnswer: -1, // Don't expose before submission
-              explanation: questions[currentQuestion].explanation,
-            }}
+            question={questions[currentQuestion]}
             questionIndex={currentQuestion}
             totalQuestions={questions.length}
             selectedAnswer={answers[currentQuestion]}

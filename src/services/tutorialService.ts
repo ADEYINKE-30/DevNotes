@@ -55,6 +55,25 @@ export interface TutorialsResponse {
 }
 
 export const tutorialService = {
+  async createTutorial(data: Partial<Tutorial>): Promise<Tutorial> {
+    const response = await apiClient.post<Tutorial>("/tutorials", data, true);
+    if (response.success && response.data) return response.data;
+    throw new Error(response.message || "Failed to create tutorial");
+  },
+
+  async createLesson(
+    tutorialId: string,
+    data: Partial<Lesson>,
+  ): Promise<Lesson> {
+    const response = await apiClient.post<Lesson>(
+      `/tutorials/${tutorialId}/lessons`,
+      data,
+      true,
+    );
+    if (response.success && response.data) return response.data;
+    throw new Error(response.message || "Failed to create video lesson");
+  },
+
   /**
    * Get all tutorials with optional filters
    */

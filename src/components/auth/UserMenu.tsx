@@ -19,7 +19,16 @@ const UserMenu = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <Link
+        to="/login"
+        className="rounded-control bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent-hover focus-visible:outline-none"
+      >
+        Log in
+      </Link>
+    );
+  }
 
   const initials = user.name
     ? user.name
@@ -45,7 +54,7 @@ const UserMenu = () => {
     <div ref={menuRef} className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-semibold text-white transition-colors hover:bg-accent-hover focus-visible:outline-none"
         aria-label="User menu"
         aria-expanded={isOpen}
       >
@@ -53,20 +62,20 @@ const UserMenu = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 z-50 mt-2 w-56 rounded-xl border border-gray-200 bg-white py-2 shadow-lg">
-          <div className="border-b border-gray-100 px-4 py-3">
-            <p className="text-sm font-medium text-gray-900">
+        <div className="absolute right-0 z-50 mt-2 w-56 rounded-panel border border-line bg-surface-elevated py-2 shadow-sm">
+          <div className="border-b border-line px-4 py-3">
+            <p className="text-sm font-medium text-content">
               {user.name || "User"}
             </p>
-            <p className="truncate text-xs text-gray-500">
+            <p className="truncate text-xs text-content-muted">
               {user.email}
             </p>
           </div>
 
           <Link
-            to="/dashboard"
+            to={user.role === "admin" ? "/admin" : "/dashboard"}
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-50"
+            className="flex items-center gap-2 px-4 py-2 text-sm text-content-secondary transition-colors hover:bg-canvas hover:text-content focus-visible:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,13 +85,13 @@ const UserMenu = () => {
             >
               <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
             </svg>
-            Dashboard
+            {user.role === "admin" ? "Admin Dashboard" : "Dashboard"}
           </Link>
 
           <Link
             to="/profile"
             onClick={() => setIsOpen(false)}
-            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-50"
+            className="flex items-center gap-2 px-4 py-2 text-sm text-content-secondary transition-colors hover:bg-canvas hover:text-content focus-visible:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +110,7 @@ const UserMenu = () => {
 
           <button
             onClick={handleLogout}
-            className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 transition hover:bg-red-50"
+            className="flex w-full items-center gap-2 px-4 py-2 text-sm text-error transition-colors hover:bg-canvas focus-visible:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

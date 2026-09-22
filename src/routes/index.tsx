@@ -17,6 +17,7 @@ import ManageArticles from "../pages/Admin/ManageArticles";
 import ManageUsers from "../pages/Admin/ManageUsers";
 import Analytics from "../pages/Admin/Analytics";
 import ManageQuizzes from "../pages/Admin/ManageQuizzes";
+import ManageVideos from "../pages/Admin/ManageVideos";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import Profile from "../pages/Profile/Profile";
 import Settings from "../pages/Settings/Settings";
@@ -148,6 +149,14 @@ const routes: RouteObject[] = [
         element: (
           <AdminRoute>
             <ManageQuizzes />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin/videos",
+        element: (
+          <AdminRoute>
+            <ManageVideos />
           </AdminRoute>
         ),
       },

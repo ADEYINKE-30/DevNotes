@@ -1,27 +1,52 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { authService } from "../../services/authService";
+
+const settingsStorageKey = "devnotes:settings";
 
 const Settings = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   
   // Initialize dark mode from localStorage and sync with document
-  const [settings, setSettings] = useState({
-    darkMode: (() => {
+  const [settings, setSettings] = useState(() => {
+    let storedSettings: Partial<{
+      darkMode: boolean;
+      emailNotifications: boolean;
+      desktopNotifications: boolean;
+      newsletter: boolean;
+      publicProfile: boolean;
+      twoFactorAuth: boolean;
+      language: string;
+    }> = {};
+
+    try {
+      storedSettings = JSON.parse(localStorage.getItem(settingsStorageKey) || "{}");
+    } catch {
+      storedSettings = {};
+    }
+
+    return {
+    darkMode: storedSettings.darkMode ?? (() => {
       try {
         const stored = localStorage.getItem("devnotes:darkMode");
         if (stored !== null) return stored === "true";
       } catch (e) {}
       return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
     })(),
-    emailNotifications: true,
-    desktopNotifications: false,
-    newsletter: true,
-    publicProfile: true,
-    twoFactorAuth: false,
-    language: "English",
+    emailNotifications: storedSettings.emailNotifications ?? true,
+    desktopNotifications: storedSettings.desktopNotifications ?? false,
+    newsletter: storedSettings.newsletter ?? true,
+    publicProfile: storedSettings.publicProfile ?? true,
+    twoFactorAuth: storedSettings.twoFactorAuth ?? false,
+    language: storedSettings.language ?? "English",
+    };
   });
+
+  useEffect(() => {
+    localStorage.setItem(settingsStorageKey, JSON.stringify(settings));
+  }, [settings]);
 
   // Sync dark mode with localStorage and document.documentElement
   useEffect(() => {
@@ -48,6 +73,32 @@ const Settings = () => {
       ...prev,
       language: newLanguage,
     }));
+  };
+
+  const handleChangePassword = async () => {
+    const currentPassword = window.prompt("Enter your current password");
+    if (!currentPassword) return;
+    const newPassword = window.prompt("Enter your new password");
+    if (!newPassword) return;
+
+    try {
+      await authService.changePassword(currentPassword, newPassword);
+      window.alert("Password changed successfully.");
+    } catch (error: any) {
+      window.alert(error.message || "Failed to change password.");
+    }
+  };
+
+  const handleDownloadData = () => {
+    const blob = new Blob([JSON.stringify({ user, settings }, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "devnotes-account-data.json";
+    link.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -258,10 +309,10 @@ const Settings = () => {
             <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Account</h2>
 
             <div className="space-y-3">
-              <button className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800/50 px-4 py-3 text-slate-900 dark:text-white hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition font-medium">
+              <button onClick={handleChangePassword} className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800/50 px-4 py-3 text-slate-900 dark:text-white hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition font-medium">
                 Change Password
               </button>
-              <button className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800/50 px-4 py-3 text-slate-900 dark:text-white hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition font-medium">
+              <button onClick={handleDownloadData} className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800/50 px-4 py-3 text-slate-900 dark:text-white hover:border-slate-400 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition font-medium">
                 Download Data
               </button>
               <button
@@ -273,7 +324,13 @@ const Settings = () => {
               >
                 Logout
               </button>
-              <button className="w-full rounded-lg border border-red-300 dark:border-red-600/30 bg-red-50 dark:bg-red-600/10 px-4 py-3 text-red-600 dark:text-red-400 hover:border-red-400 dark:hover:border-red-600/50 hover:bg-red-100 dark:hover:bg-red-600/20 transition font-medium">
+              <button
+                onClick={async () => {
+                  if (!window.confirm("Delete your account? This action cannot be undone.")) return;
+                  window.alert("Account deletion is not available yet. Please contact support.");
+                }}
+                className="w-full rounded-lg border border-red-300 dark:border-red-600/30 bg-red-50 dark:bg-red-600/10 px-4 py-3 text-red-600 dark:text-red-400 hover:border-red-400 dark:hover:border-red-600/50 hover:bg-red-100 dark:hover:bg-red-600/20 transition font-medium"
+              >
                 Delete Account
               </button>
             </div>

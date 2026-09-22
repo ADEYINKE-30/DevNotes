@@ -1,4 +1,4 @@
-import type { QuizAttempt } from "../../data/mockQuizzes";
+import type { QuizAttempt } from "../../services/quizService";
 
 interface QuizHistoryProps {
   attempts: QuizAttempt[];
@@ -25,7 +25,7 @@ const QuizHistory = ({ attempts, quizTitles }: QuizHistoryProps) => {
 
       <div className="divide-y divide-gray-100">
         {attempts.map((attempt) => {
-          const percentage = Math.round((attempt.score / attempt.total) * 100);
+          const percentage = Math.round(attempt.percentage);
 
           const getScoreColor = () => {
             if (percentage >= 80) return "text-green-600";
@@ -34,13 +34,13 @@ const QuizHistory = ({ attempts, quizTitles }: QuizHistoryProps) => {
           };
 
           return (
-            <div key={attempt.id} className="flex items-center justify-between px-6 py-4">
+            <div key={attempt._id} className="flex items-center justify-between px-6 py-4">
               <div>
                 <p className="font-medium text-gray-900">
-                  {quizTitles[attempt.quizId] || "Unknown Quiz"}
+                  {quizTitles[attempt.quiz] || "Unknown Quiz"}
                 </p>
                 <p className="mt-0.5 text-xs text-gray-400">
-                  {new Date(attempt.date).toLocaleDateString(undefined, {
+                  {new Date(attempt.submittedAt || attempt.startedAt).toLocaleDateString(undefined, {
                     year: "numeric",
                     month: "short",
                     day: "numeric",
@@ -51,7 +51,7 @@ const QuizHistory = ({ attempts, quizTitles }: QuizHistoryProps) => {
               </div>
               <div className="text-right">
                 <p className={`text-lg font-bold ${getScoreColor()}`}>
-                  {attempt.score}/{attempt.total}
+                  {attempt.score} points
                 </p>
                 <p className="text-xs text-gray-400">{percentage}%</p>
               </div>

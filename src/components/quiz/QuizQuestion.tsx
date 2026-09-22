@@ -1,4 +1,4 @@
-import type { QuizQuestion as QuizQuestionType } from "../../data/mockQuizzes";
+import type { QuizQuestion as QuizQuestionType } from "../../services/quizService";
 
 interface QuizQuestionProps {
   question: QuizQuestionType;
@@ -24,11 +24,14 @@ const QuizQuestion = ({
         : "border-gray-200 hover:border-blue-300 hover:bg-blue-50";
     }
 
-    if (optionIndex === question.correctAnswer) {
+    if (question.correctAnswer && question.options[optionIndex] === question.correctAnswer) {
       return "border-green-500 bg-green-50 ring-2 ring-green-200";
     }
 
-    if (selectedAnswer === optionIndex && optionIndex !== question.correctAnswer) {
+    if (
+      selectedAnswer === optionIndex &&
+      question.options[optionIndex] !== question.correctAnswer
+    ) {
       return "border-red-500 bg-red-50 ring-2 ring-red-200";
     }
 
@@ -59,9 +62,9 @@ const QuizQuestion = ({
           >
             <span
               className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                showResult && index === question.correctAnswer
+                showResult && question.options[index] === question.correctAnswer
                   ? "bg-green-500 text-white"
-                  : showResult && selectedAnswer === index
+                  : showResult && selectedAnswer === index && question.options[index] !== question.correctAnswer
                   ? "bg-red-500 text-white"
                   : "bg-gray-100 text-gray-600"
               }`}
@@ -76,13 +79,16 @@ const QuizQuestion = ({
       {showResult && (
         <div
           className={`mt-4 rounded-lg p-4 text-sm ${
-            selectedAnswer === question.correctAnswer
+            question.correctAnswer && question.options[selectedAnswer ?? -1] === question.correctAnswer
               ? "bg-green-50 text-green-800"
               : "bg-red-50 text-red-800"
           }`}
         >
           <p className="font-medium">
-            {selectedAnswer === question.correctAnswer ? "✅ Correct!" : "❌ Incorrect"}
+            {question.correctAnswer &&
+            question.options[selectedAnswer ?? -1] === question.correctAnswer
+              ? "✅ Correct!"
+              : "❌ Incorrect"}
           </p>
           <p className="mt-1 text-gray-600">{question.explanation}</p>
         </div>

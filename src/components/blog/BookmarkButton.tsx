@@ -1,20 +1,33 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { mockBookmarks } from "../../data/mockBookmarks";
+import { bookmarkService } from "../../services/bookmarkService";
 
 interface BookmarkButtonProps {
-  postId: number;
+  postId: string;
+  title: string;
+  description: string;
+  category: string;
+  slug: string;
+  image?: string;
 }
 
-const BookmarkButton = ({ postId }: BookmarkButtonProps) => {
+const BookmarkButton = ({ postId, title, description, category, slug, image }: BookmarkButtonProps) => {
   const { user } = useAuth();
   const [bookmarked, setBookmarked] = useState(() =>
-    mockBookmarks.some((b) => b.postId === postId && b.userId === user?.email),
+    user ? bookmarkService.has(user._id, postId) : false,
   );
 
   const handleToggle = () => {
     if (!user) return;
-    setBookmarked(!bookmarked);
+    setBookmarked(bookmarkService.toggle(user._id, {
+      postId,
+      title,
+      description,
+      category,
+      slug,
+      image,
+      createdAt: new Date().toISOString(),
+    }));
   };
 
   return (

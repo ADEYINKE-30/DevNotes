@@ -2,37 +2,45 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-900 py-20 md:py-32">
-      <div className="mx-auto max-w-4xl px-6 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-2">
-          <span className="h-2 w-2 rounded-full bg-purple-500" />
-          <p className="text-sm font-medium text-purple-300">
-            Welcome to DevNotes
+    <section className="border-b border-line bg-canvas">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-12 sm:px-6 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.8fr)] md:items-center md:gap-16 lg:py-16">
+        <div className="max-w-3xl border-l-2 border-accent pl-5 sm:pl-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            DevNotes
           </p>
+
+          <h1 className="mt-5 max-w-2xl text-4xl font-semibold tracking-tight text-content sm:text-5xl lg:text-6xl">
+            Learn. Build. Share.
+          </h1>
+
+          <p className="mt-5 max-w-2xl text-base leading-7 text-content-secondary sm:text-lg">
+            Practical development concepts, tutorials, and challenges for developers who want to understand the work and build better software.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link to="/blog" className="rounded-control bg-accent px-5 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-accent-hover focus-visible:outline-none">
+              Explore Articles
+            </Link>
+            <Link to="/videos" className="rounded-control border border-line bg-surface px-5 py-3 text-center text-sm font-semibold text-content transition-colors hover:border-accent hover:text-accent focus-visible:outline-none">
+              Start Learning
+            </Link>
+          </div>
         </div>
 
-        <h1 className="mt-8 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-5xl font-bold leading-tight text-transparent md:text-6xl lg:text-7xl">
-          Learn. Build. Share.
-        </h1>
-
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-          Your AI-powered learning platform for developers. Master React, TypeScript, JavaScript, and more through interactive tutorials, quizzes, and community.
-        </p>
-
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row justify-center">
-          <Link
-            to="/blog"
-            className="rounded-lg bg-gradient-to-r from-purple-600 to-violet-600 px-8 py-3 font-semibold text-white transition hover:from-purple-500 hover:to-violet-500 hover:shadow-lg hover:shadow-purple-500/30"
-          >
-            Start Exploring
-          </Link>
-
-          <Link
-            to="/community"
-            className="rounded-lg border border-purple-500/30 bg-purple-500/10 px-8 py-3 font-semibold text-purple-300 transition hover:border-purple-500/50 hover:bg-purple-500/20"
-          >
-            Join Community
-          </Link>
+        <div className="border border-line bg-surface p-4 shadow-sm sm:p-5" aria-label="DevNotes learning preview">
+          <div className="flex items-center justify-between border-b border-line pb-3 text-xs text-content-muted">
+            <span>devnotes / learning-path</span>
+            <span className="text-success">● live</span>
+          </div>
+          <div className="py-5 font-mono text-sm leading-7 text-content-secondary">
+            <p><span className="text-accent">01</span> <span className="text-content">Understand</span> the concept</p>
+            <p><span className="text-accent">02</span> <span className="text-content">Build</span> a small example</p>
+            <p><span className="text-accent">03</span> <span className="text-content">Practice</span> what you learned</p>
+            <p><span className="text-accent">04</span> <span className="text-content">Share</span> your progress</p>
+          </div>
+          <div className="border-t border-line pt-3 text-xs text-content-muted">
+            <span className="text-accent">&gt;</span> practical knowledge, one idea at a time
+          </div>
         </div>
       </div>
     </section>

@@ -95,7 +95,7 @@ const SearchBar = ({ variant = "header", onResultClick }: SearchBarProps) => {
             onFocus={() => setIsOpen(true)}
             onKeyDown={handleKeyDown}
             placeholder="Search blog posts, videos, and pages..."
-            className="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-5 py-4 pl-12 text-base text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-200 dark:focus:ring-purple-500/20"
+            className="w-full rounded-panel border border-line bg-surface px-5 py-4 pl-12 text-base text-content placeholder:text-content-muted focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
           />
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 dark:text-slate-500">
             🔍
@@ -128,14 +128,14 @@ const SearchBar = ({ variant = "header", onResultClick }: SearchBarProps) => {
         onFocus={() => setIsOpen(true)}
         onKeyDown={handleKeyDown}
         placeholder="Search..."
-        className="w-48 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 pl-9 text-sm text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-200 dark:focus:ring-purple-500/20"
+        className="w-full min-w-0 rounded-control border border-line bg-surface px-3 py-2 pl-9 text-sm text-content placeholder:text-content-muted focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus/20 sm:w-48"
       />
       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 dark:text-slate-500">
         🔍
       </span>
 
       {isOpen && query.trim() && (
-        <div className="absolute right-0 top-full z-50 mt-2 w-[500px]">
+        <div className="absolute right-0 top-full z-50 mt-2 w-[min(31.25rem,calc(100vw-2rem))]">
           <SearchResults
             results={results}
             query={query}

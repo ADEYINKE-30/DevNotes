@@ -17,21 +17,21 @@ const MainLayout = () => {
   const showSidebar = !noSidebarPages.includes(location.pathname);
 
   return (
-    <div className="flex min-h-screen bg-white dark:bg-slate-950">
+    <div className="flex min-h-screen bg-canvas text-content">
       {/* Sidebar */}
       {showSidebar && (
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       )}
 
       {/* Main Content Area */}
-      <div className="flex flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col">
         {/* Header */}
         {showSidebar && (
           <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         )}
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="min-w-0 flex-1 overflow-y-auto">
           <Outlet />
         </main>
 
@@ -43,10 +43,11 @@ const MainLayout = () => {
       {!showAIChat && showSidebar && (
         <button
           onClick={toggleAIChat}
-          className="group fixed bottom-6 right-6 z-40 flex items-center gap-3 rounded-full bg-gradient-to-r from-purple-500 to-violet-600 px-5 py-3 text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
+          className="group fixed bottom-5 right-4 z-40 flex items-center gap-2 rounded-tool border border-accent bg-accent px-4 py-2.5 text-white shadow-sm transition-colors hover:bg-accent-hover focus-visible:outline-none sm:bottom-6 sm:right-6"
           title="Open AI Assistant"
+          aria-label="Open AI Assistant"
         >
-          <span className="text-xl">✨</span>
+          <span aria-hidden="true" className="text-sm">Ask</span>
           <span className="text-sm font-semibold">AI Assistant</span>
         </button>
       )}

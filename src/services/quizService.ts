@@ -43,6 +43,13 @@ export interface QuizAttempt {
   submittedAt: string;
 }
 
+export interface QuizStartResponse {
+  attemptId: string;
+  attempt?: QuizAttempt;
+  quiz?: Quiz;
+  startedAt?: string;
+}
+
 export interface QuizResult {
   score: number;
   totalPoints: number;
@@ -68,6 +75,39 @@ export interface QuizzesResponse {
 }
 
 export const quizService = {
+    async createQuiz(data: {
+      tutorial: string;
+      title: string;
+      description: string;
+      passingScore: number;
+      timeLimit: number;
+      published: boolean;
+    }): Promise<Quiz> {
+      const response = await apiClient.post<Quiz>("/quizzes", data, true);
+      if (response.success && response.data) return response.data;
+      throw new Error(response.message || "Failed to create quiz");
+    },
+
+    async createQuestion(
+      quizId: string,
+      data: {
+        question: string;
+        type: QuizQuestion["type"];
+        options: string[];
+        correctAnswer: string;
+        explanation: string;
+        points: number;
+        order: number;
+      },
+    ): Promise<QuizQuestion> {
+      const response = await apiClient.post<QuizQuestion>(
+        `/quizzes/${quizId}/questions`,
+        data,
+        true,
+      );
+      if (response.success && response.data) return response.data;
+      throw new Error(response.message || "Failed to create quiz question");
+    },
   /**
    * Get all quizzes with optional filters
    */
@@ -129,7 +169,7 @@ export const quizService = {
   /**
    * Start a quiz attempt (requires auth)
    */
-  async startQuiz(quizId: string): Promise<{ attempt: QuizAttempt; quiz: Quiz; startedAt: string }> {
+  async startQuiz(quizId: string): Promise<QuizStartResponse> {
     const response = await apiClient.post<any>(
       `/quizzes/${quizId}/start`,
       {},
@@ -137,7 +177,25 @@ export const quizService = {
     );
     
     if (response.success && response.data) {
-      return response.data;
+      const data = response.data as {
+        attempt?: QuizAttempt;
+        attemptId?: string;
+        quiz?: Quiz;
+        startedAt?: string;
+        _id?: string;
+      };
+      const attemptId = data.attemptId || data.attempt?._id || data._id;
+
+      if (!attemptId) {
+        throw new Error('Quiz start response did not include an attempt ID');
+      }
+
+      return {
+        attemptId,
+        attempt: data.attempt,
+        quiz: data.quiz,
+        startedAt: data.startedAt,
+      };
     }
     
     throw new Error(response.message || 'Failed to start quiz');

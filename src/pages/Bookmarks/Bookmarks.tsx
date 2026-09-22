@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom";
-import { mockBookmarks } from "../../data/mockBookmarks";
-import { posts } from "../../constants/posts";
+import { useAuth } from "../../context/AuthContext";
+import { bookmarkService } from "../../services/bookmarkService";
+import { useState } from "react";
 
 const Bookmarks = () => {
-  // Combine bookmarks with post details
-  const bookmarkedPosts = mockBookmarks
-    .map((bookmark) => {
-      const post = posts.find((p) => p.id === bookmark.postId);
-      return post ? { ...post, bookmarkedDate: bookmark.createdAt } : null;
-    })
-    .filter((item) => item !== null);
+  const { user } = useAuth();
+  const [bookmarkedPosts, setBookmarkedPosts] = useState(() =>
+    user ? bookmarkService.getAll(user._id) : [],
+  );
+
+  const removeBookmark = (postId: string) => {
+    if (!user) return;
+    bookmarkService.remove(user._id, postId);
+    setBookmarkedPosts((current) => current.filter((bookmark) => bookmark.postId !== postId));
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 py-8">
@@ -26,7 +30,7 @@ const Bookmarks = () => {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {bookmarkedPosts.map((item) => (
               <div
-                key={item.id}
+                key={item.postId}
                 className="group flex flex-col rounded-xl border border-slate-700 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden transition hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10"
               >
                 {/* Image */}
@@ -49,6 +53,7 @@ const Bookmarks = () => {
                       {item.category}
                     </span>
                     <button
+                      onClick={() => removeBookmark(item.postId)}
                       className="rounded-lg p-2 text-slate-400 hover:bg-slate-700 hover:text-red-400 transition"
                       title="Remove bookmark"
                     >
@@ -66,7 +71,7 @@ const Bookmarks = () => {
 
                   <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-700">
                     <small className="text-slate-500">
-                      Saved {item.bookmarkedDate}
+                      Saved {new Date(item.createdAt).toLocaleDateString()}
                     </small>
                     <Link
                       to={`/blog/${item.slug}`}

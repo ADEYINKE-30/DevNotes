@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { newsletterService } from "../../../services/newsletterService";
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
   if (!email.trim()) {
@@ -11,9 +12,10 @@ const Newsletter = () => {
     return;
   }
 
-  setMessage(`🎉 Thanks for subscribing, ${email}!`);
+  const result = await newsletterService.subscribe(email, "");
+  setMessage(result.success ? `🎉 ${result.message}` : result.message);
 
-  setEmail("");
+  if (result.success) setEmail("");
 };
   return (
     <section className="mx-auto max-w-3xl rounded-xl bg-slate-100 px-6 py-12 text-center">
@@ -24,7 +26,7 @@ const Newsletter = () => {
       </p>
 
       {message && (
-  <p className="mt-4 rounded-lg bg-green-100 p-3 text-green-700">
+  <p className={`mt-4 rounded-lg p-3 ${message.startsWith("🎉") ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
     {message}
   </p>
 )}

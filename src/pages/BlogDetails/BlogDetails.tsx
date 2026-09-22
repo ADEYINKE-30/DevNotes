@@ -92,7 +92,14 @@ const BlogDetails = () => {
       {/* Interaction Buttons */}
       <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-gray-200 pt-6">
         <LikeButton postId={mappedPost.id} />
-        <BookmarkButton postId={mappedPost.id} />
+        <BookmarkButton
+          postId={mappedPost.id}
+          title={mappedPost.title}
+          description={mappedPost.description}
+          category={mappedPost.category}
+          slug={mappedPost.slug}
+          image={mappedPost.image}
+        />
         <ShareButton
           title={post.title}
           url={window.location.href}

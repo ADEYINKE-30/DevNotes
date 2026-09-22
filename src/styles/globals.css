@@ -1,0 +1,49 @@
+@layer base {
+	a {
+		color: inherit;
+	}
+
+	:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+		outline: 3px solid color-mix(in srgb, var(--color-focus) 38%, transparent);
+		outline-offset: 2px;
+	}
+
+	::selection {
+		background: var(--color-accent);
+		color: #ffffff;
+	}
+}
+
+html {
+	scrollbar-color: var(--color-border-strong) var(--color-canvas);
+}
+
+::-webkit-scrollbar {
+	width: 0.5rem;
+	height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+	border: 1px solid var(--color-canvas);
+	border-radius: var(--radius-control);
+	background: var(--color-border-strong);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

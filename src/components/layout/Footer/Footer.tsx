@@ -3,18 +3,18 @@ import { navigationLinks } from "../../../constants/navigation";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-slate-700 bg-gradient-to-b from-slate-900 to-slate-950">
-      <div className="mx-auto max-w-7xl px-6 py-12">
+    <footer className="border-t border-line bg-surface">
+      <div className="mx-auto max-w-7xl px-5 py-10 sm:px-6">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Brand */}
           <div>
             <Link
               to="/"
-              className="text-2xl font-extrabold tracking-tight text-white"
+              className="text-xl font-semibold tracking-tight text-content"
             >
-              Dev<span className="text-purple-400">Notes</span>
+              Dev<span className="text-accent">Notes</span>
             </Link>
-            <p className="mt-3 text-sm text-slate-400">
+            <p className="mt-3 max-w-sm text-sm text-content-secondary">
               An AI-powered learning platform for developers. Learn, build, and
               share with the community.
             </p>
@@ -22,7 +22,7 @@ const Footer = () => {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-content-muted">
               Navigation
             </h3>
             <ul className="mt-4 space-y-2">
@@ -30,7 +30,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm text-slate-400 transition hover:text-purple-400"
+                    className="text-sm text-content-secondary transition-colors hover:text-accent focus-visible:outline-none"
                   >
                     {link.label}
                   </Link>
@@ -41,10 +41,10 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-content-muted">
               Connect
             </h3>
-            <ul className="mt-4 space-y-2 text-sm text-slate-400">
+            <ul className="mt-4 space-y-2 text-sm text-content-secondary">
               <li>Twitter / X</li>
               <li>GitHub</li>
               <li>Discord</li>
@@ -53,7 +53,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-slate-700 pt-6 text-center text-sm text-slate-500">
+        <div className="mt-10 border-t border-line pt-6 text-center text-xs text-content-muted">
           &copy; {new Date().getFullYear()} DevNotes. All rights reserved.
         </div>
       </div>

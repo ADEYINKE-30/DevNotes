@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { tutorialService } from "../../services/tutorialService";
 import { quizService } from "../../services/quizService";
@@ -50,6 +51,10 @@ const Dashboard = () => {
         </div>
       </section>
     );
+  }
+
+  if (user.role === "admin") {
+    return <Navigate to="/admin" replace />;
   }
 
   if (loading) {
