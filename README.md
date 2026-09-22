@@ -291,7 +291,7 @@ Software Developer
 
 Lagos, Nigeria
 
-* GitHub: [ADEYINKE-30](https://github.com/ADEYINKE-30)
+
 
 ## 📄 License
 
