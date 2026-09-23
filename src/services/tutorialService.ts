@@ -61,6 +61,13 @@ export const tutorialService = {
     throw new Error(response.message || "Failed to create tutorial");
   },
 
+  async deleteTutorial(tutorialId: string): Promise<void> {
+    const response = await apiClient.delete<void>(`/tutorials/${tutorialId}`, true);
+    if (!response.success) {
+      throw new Error(response.message || "Failed to delete tutorial");
+    }
+  },
+
   async createLesson(
     tutorialId: string,
     data: Partial<Lesson>,

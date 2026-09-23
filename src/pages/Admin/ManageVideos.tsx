@@ -14,6 +14,7 @@ const ManageVideos = () => {
   const [tutorials, setTutorials] = useState<Tutorial[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState("");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [form, setForm] = useState({
     title: "", description: "", category: "", difficulty: "Beginner" as Tutorial["difficulty"],
     duration: "", instructor: "", thumbnail: "",
@@ -54,6 +55,22 @@ const ManageVideos = () => {
     }
   };
 
+  const handleDelete = async (tutorial: Tutorial) => {
+    if (!window.confirm(`Delete "${tutorial.title}" and all of its lessons? This action cannot be undone.`)) return;
+
+    setDeletingId(tutorial._id);
+    setMessage("");
+    try {
+      await tutorialService.deleteTutorial(tutorial._id);
+      setMessage("Tutorial deleted successfully.");
+      await loadTutorials();
+    } catch (error: any) {
+      setMessage(error.message || "Failed to delete tutorial");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
@@ -89,8 +106,8 @@ const ManageVideos = () => {
         </form>
       )}
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
-        <table className="w-full"><thead className="border-b border-gray-200 bg-gray-50"><tr><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Title</th><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Category</th><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Difficulty</th><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Status</th></tr></thead>
-          <tbody className="divide-y divide-gray-200">{tutorials.map((tutorial) => <tr key={tutorial._id}><td className="px-6 py-4 text-sm font-medium text-gray-900">{tutorial.title}</td><td className="px-6 py-4 text-sm text-gray-500">{tutorial.category}</td><td className="px-6 py-4 text-sm text-gray-500">{tutorial.difficulty}</td><td className="px-6 py-4 text-sm text-green-600">{tutorial.published ? "Published" : "Draft"}</td></tr>)}</tbody>
+        <table className="w-full"><thead className="border-b border-gray-200 bg-gray-50"><tr><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Title</th><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Category</th><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Difficulty</th><th className="px-6 py-3 text-left text-xs uppercase text-gray-500">Status</th><th className="px-6 py-3 text-right text-xs uppercase text-gray-500">Actions</th></tr></thead>
+          <tbody className="divide-y divide-gray-200">{tutorials.map((tutorial) => <tr key={tutorial._id}><td className="px-6 py-4 text-sm font-medium text-gray-900">{tutorial.title}</td><td className="px-6 py-4 text-sm text-gray-500">{tutorial.category}</td><td className="px-6 py-4 text-sm text-gray-500">{tutorial.difficulty}</td><td className="px-6 py-4 text-sm text-green-600">{tutorial.published ? "Published" : "Draft"}</td><td className="px-6 py-4 text-right"><button type="button" onClick={() => void handleDelete(tutorial)} disabled={deletingId === tutorial._id} className="text-sm font-semibold text-red-600 hover:text-red-700 disabled:cursor-not-allowed disabled:opacity-50">{deletingId === tutorial._id ? "Deleting..." : "Delete"}</button></td></tr>)}</tbody>
         </table>
       </div>
     </div>
