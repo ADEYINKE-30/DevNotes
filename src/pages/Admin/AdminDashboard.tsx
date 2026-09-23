@@ -47,28 +47,28 @@ const AdminDashboard = () => {
         <StatsCard
           title="Total Articles"
           value={loading ? "..." : posts.length}
-          icon="📝"
+          icon="articles"
           change="Published content"
           href="/admin/articles"
         />
         <StatsCard
           title="Tutorials"
           value={loading ? "..." : tutorials.length}
-          icon="🎥"
+          icon="videos"
           change="Learning content"
           href="/admin/videos"
         />
         <StatsCard
           title="Quizzes"
           value={loading ? "..." : quizzes.length}
-          icon="🧪"
+          icon="quizzes"
           change="Assessment content"
           href="/admin/quizzes"
         />
         <StatsCard
           title="Discussions"
           value={loading ? "..." : discussions.length}
-          icon="💬"
+          icon="community"
           change="Community threads"
           href="/community"
         />

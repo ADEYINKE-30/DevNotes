@@ -1,3 +1,5 @@
+import { Award, BookOpen, ThumbsUp, Trophy } from "lucide-react";
+
 interface QuizResultProps {
   score: number;
   total: number;
@@ -14,24 +16,24 @@ const QuizResult = ({ score, total, percentage: propPercentage, passed, passingS
   const getGrade = () => {
     if (passed !== undefined) {
       if (passed) {
-        return { emoji: "🏆", label: "Passed!", color: "text-green-600" };
+        return { icon: Trophy, label: "Passed!", color: "text-green-600" };
       } else {
-        return { emoji: "📚", label: "Keep Learning!", color: "text-yellow-600" };
+        return { icon: BookOpen, label: "Keep Learning!", color: "text-yellow-600" };
       }
     }
 
     // Fallback to percentage-based grading
-    if (percentage >= 90) return { emoji: "🏆", label: "Excellent!", color: "text-green-600" };
-    if (percentage >= 70) return { emoji: "👏", label: "Great Job!", color: "text-blue-600" };
-    if (percentage >= 50) return { emoji: "💪", label: "Good Effort!", color: "text-yellow-600" };
-    return { emoji: "📚", label: "Keep Learning!", color: "text-gray-600" };
+    if (percentage >= 90) return { icon: Trophy, label: "Excellent!", color: "text-green-600" };
+    if (percentage >= 70) return { icon: ThumbsUp, label: "Great Job!", color: "text-blue-600" };
+    if (percentage >= 50) return { icon: Award, label: "Good Effort!", color: "text-yellow-600" };
+    return { icon: BookOpen, label: "Keep Learning!", color: "text-gray-600" };
   };
 
   const grade = getGrade();
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm">
-      <div className="text-6xl">{grade.emoji}</div>
+      <grade.icon aria-hidden="true" className={`mx-auto h-14 w-14 ${grade.color}`} />
 
       <h2 className={`mt-4 text-2xl font-bold ${grade.color}`}>{grade.label}</h2>
 

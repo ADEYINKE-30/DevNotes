@@ -29,11 +29,11 @@ const PostCard = ({ post }: PostCardProps) => {
 
       <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-gray-400">
         <span className="flex items-center gap-1">
-          <span className="text-sm">{post.author.avatar || "👤"}</span>
+          <span className="text-sm font-semibold">{post.author.avatar || "User"}</span>
           {post.author.name}
         </span>
         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-        <span>💬 {post.commentCount || 0}</span>
+        <span>Comments: {post.commentCount || 0}</span>
       </div>
 
       {post.tags.length > 0 && (

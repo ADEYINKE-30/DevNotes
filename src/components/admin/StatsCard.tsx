@@ -1,3 +1,5 @@
+import { BarChart3, BookOpen, Eye, MessageSquare, TrendingDown, UserPlus, Users, Video } from "lucide-react";
+
 interface StatsCardProps {
   title: string;
   value: string | number;
@@ -8,6 +10,8 @@ interface StatsCardProps {
 }
 
 const StatsCard = ({ title, value, icon, change, changeType = "neutral", href }: StatsCardProps) => {
+  const icons = { articles: BookOpen, videos: Video, quizzes: BarChart3, community: MessageSquare, views: Eye, users: Users, bounce: TrendingDown, signups: UserPlus };
+  const Icon = icons[icon as keyof typeof icons] || BarChart3;
   const changeColors = {
     positive: "text-green-600",
     negative: "text-red-600",
@@ -26,7 +30,7 @@ const StatsCard = ({ title, value, icon, change, changeType = "neutral", href }:
             </p>
           )}
         </div>
-        <span className="text-4xl">{icon}</span>
+        <Icon aria-hidden="true" className="h-8 w-8 text-blue-600" />
       </div>
     </div>
   );

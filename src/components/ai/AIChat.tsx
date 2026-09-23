@@ -4,6 +4,7 @@ import ChatInput from "./ChatInput";
 import { useAIChat } from "../../hooks/useAIChat";
 import { aiService } from "../../services/aiService";
 import type { AISuggestion } from "../../services/aiService";
+import { Bot, X } from "lucide-react";
 
 interface AIChatProps {
   isFullPage?: boolean;
@@ -46,7 +47,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 px-4 py-3">
             <div className="flex items-center gap-2">
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30 text-sm">
-                🤖
+                <Bot aria-hidden="true" className="h-4 w-4 text-purple-700 dark:text-purple-300" />
               </span>
               <span className="font-semibold text-slate-900 dark:text-white">DevNotes AI</span>
             </div>
@@ -110,7 +111,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
       <div className={headerClasses}>
         <div className="flex items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30 text-sm">
-            🤖
+            <Bot aria-hidden="true" className="h-4 w-4 text-purple-700 dark:text-purple-300" />
           </span>
           <span className="font-semibold text-slate-900 dark:text-white">AI Assistant</span>
         </div>
@@ -120,7 +121,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
             className="text-xs text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
             title="Clear chat"
           >
-            ✕
+            <X aria-hidden="true" className="h-4 w-4" />
           </button>
           {onClose && (
             <button
@@ -128,7 +129,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
               className="text-xs text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
               title="Close"
             >
-              ✕
+              <X aria-hidden="true" className="h-4 w-4" />
             </button>
           )}
         </div>

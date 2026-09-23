@@ -32,21 +32,21 @@ export interface WeeklyGoal {
 }
 
 export const mockBadges: Badge[] = [
-  { id: "badge-1", name: "First Steps", description: "Complete your first lesson", icon: "🌟", unlockedAt: "2026-07-01" },
-  { id: "badge-2", name: "React Rookie", description: "Complete the React quiz", icon: "⚛️", unlockedAt: "2026-07-03" },
-  { id: "badge-3", name: "TypeScript Fan", description: "Complete the TypeScript quiz", icon: "📘", unlockedAt: "2026-07-05" },
-  { id: "badge-4", name: "Streak Master", description: "Maintain a 7-day streak", icon: "🔥" },
-  { id: "badge-5", name: "Video Learner", description: "Watch 5 video tutorials", icon: "🎬", unlockedAt: "2026-07-08" },
-  { id: "badge-6", name: "Quiz Champion", description: "Score 100% on any quiz", icon: "🏆" },
-  { id: "badge-7", name: "Community Member", description: "Post your first comment", icon: "💬" },
-  { id: "badge-8", name: "Knowledge Seeker", description: "Read 10 blog articles", icon: "📚", unlockedAt: "2026-07-10" },
+  { id: "badge-1", name: "First Steps", description: "Complete your first lesson", icon: "star", unlockedAt: "2026-07-01" },
+  { id: "badge-2", name: "React Rookie", description: "Complete the React quiz", icon: "puzzle", unlockedAt: "2026-07-03" },
+  { id: "badge-3", name: "TypeScript Fan", description: "Complete the TypeScript quiz", icon: "book", unlockedAt: "2026-07-05" },
+  { id: "badge-4", name: "Streak Master", description: "Maintain a 7-day streak", icon: "flame" },
+  { id: "badge-5", name: "Video Learner", description: "Watch 5 video tutorials", icon: "play", unlockedAt: "2026-07-08" },
+  { id: "badge-6", name: "Quiz Champion", description: "Score 100% on any quiz", icon: "trophy" },
+  { id: "badge-7", name: "Community Member", description: "Post your first comment", icon: "award" },
+  { id: "badge-8", name: "Knowledge Seeker", description: "Read 10 blog articles", icon: "book", unlockedAt: "2026-07-10" },
 ];
 
 export const mockXPData: XPEntry[] = [
   {
     userId: "user-1",
     username: "Adepoju Adeyinka",
-    avatar: "👨‍💻",
+    avatar: "AA",
     xp: 2450,
     level: 12,
     badges: [mockBadges[0], mockBadges[1], mockBadges[2], mockBadges[4], mockBadges[7]],
@@ -54,7 +54,7 @@ export const mockXPData: XPEntry[] = [
   {
     userId: "user-2",
     username: "JaneDev",
-    avatar: "👩‍💻",
+    avatar: "JD",
     xp: 1890,
     level: 9,
     badges: [mockBadges[0], mockBadges[1], mockBadges[3]],
@@ -62,7 +62,7 @@ export const mockXPData: XPEntry[] = [
   {
     userId: "user-3",
     username: "CodeNinja",
-    avatar: "🥷",
+    avatar: "CN",
     xp: 3200,
     level: 15,
     badges: [mockBadges[0], mockBadges[1], mockBadges[2], mockBadges[4], mockBadges[5]],
@@ -70,7 +70,7 @@ export const mockXPData: XPEntry[] = [
   {
     userId: "user-4",
     username: "WebWizard",
-    avatar: "🧙",
+    avatar: "WW",
     xp: 1500,
     level: 7,
     badges: [mockBadges[0], mockBadges[1]],
@@ -78,7 +78,7 @@ export const mockXPData: XPEntry[] = [
   {
     userId: "user-5",
     username: "CSSQueen",
-    avatar: "👸",
+    avatar: "CQ",
     xp: 2800,
     level: 13,
     badges: [mockBadges[0], mockBadges[2], mockBadges[4], mockBadges[7]],

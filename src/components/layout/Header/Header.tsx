@@ -3,6 +3,7 @@ import SearchBar from "../../search/SearchBar";
 import UserMenu from "../../auth/UserMenu";
 import Notifications from "./Notifications.tsx";
 import { notificationService } from "../../../services/notificationService";
+import { Bell, Menu, Moon, Sun } from "lucide-react";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -56,7 +57,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
             title="Open navigation"
             aria-label="Open navigation"
           >
-            <span aria-hidden="true" className="text-lg leading-none">☰</span>
+            <Menu aria-hidden="true" className="h-5 w-5" />
           </button>
           <div className="min-w-0 max-w-md flex-1">
             <SearchBar />
@@ -73,7 +74,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
             aria-label={isDarkMode ? "Switch to light theme" : "Switch to dark theme"}
             aria-pressed={isDarkMode}
           >
-            <span aria-hidden="true">{isDarkMode ? "Moon" : "Sun"}</span>
+            {isDarkMode ? <Moon aria-hidden="true" className="h-4 w-4" /> : <Sun aria-hidden="true" className="h-4 w-4" />}
           </button>
 
           {/* Notifications */}
@@ -86,7 +87,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
               aria-expanded={showNotifications}
               aria-haspopup="dialog"
             >
-              <span aria-hidden="true">Bell</span>
+              <Bell aria-hidden="true" className="h-4 w-4" />
               {unreadCount > 0 && (
                 <span className="absolute right-0 top-0 min-w-4 rounded-full bg-error px-1 text-center text-[10px] leading-4 text-white">
                   {unreadCount > 9 ? "9+" : unreadCount}

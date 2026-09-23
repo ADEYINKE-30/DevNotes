@@ -1,5 +1,6 @@
 import type { SearchResult } from "../../data/mockSearchData";
 import SearchResultCard from "./SearchResultCard";
+import { Search as SearchIcon } from "lucide-react";
 
 interface SearchResultsProps {
   results: SearchResult[];
@@ -25,7 +26,7 @@ const SearchResults = ({ results, query, isLoading, onResultClick }: SearchResul
   if (!query.trim()) {
     return (
       <div className="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-lg">
-        <p className="text-3xl">🔍</p>
+        <SearchIcon aria-hidden="true" className="mx-auto h-8 w-8 text-gray-400" />
         <p className="mt-2 text-sm text-gray-500">
           Start typing to search across blog posts, videos, and pages.
         </p>
@@ -36,7 +37,7 @@ const SearchResults = ({ results, query, isLoading, onResultClick }: SearchResul
   if (results.length === 0) {
     return (
       <div className="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-lg">
-        <p className="text-3xl">🔍</p>
+        <SearchIcon aria-hidden="true" className="mx-auto h-8 w-8 text-gray-400" />
         <p className="mt-2 text-sm font-medium text-gray-900">No results found</p>
         <p className="mt-1 text-xs text-gray-500">
           No results for "{query}". Try a different search term.

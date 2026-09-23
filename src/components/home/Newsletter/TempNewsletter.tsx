@@ -3,17 +3,20 @@ import { newsletterService } from "../../../services/newsletterService";
 const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
   if (!email.trim()) {
+    setIsSuccess(false);
     setMessage("Please enter your email.");
     return;
   }
 
   const result = await newsletterService.subscribe(email, "");
-  setMessage(result.success ? `🎉 ${result.message}` : result.message);
+  setIsSuccess(result.success);
+  setMessage(result.message);
 
   if (result.success) setEmail("");
 };
@@ -26,7 +29,7 @@ const Newsletter = () => {
       </p>
 
       {message && (
-  <p className={`mt-4 rounded-lg p-3 ${message.startsWith("🎉") ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
+  <p className={`mt-4 rounded-lg p-3 ${isSuccess ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
     {message}
   </p>
 )}

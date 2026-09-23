@@ -18,8 +18,8 @@ const ArticleContent = ({ post }: ArticleContentProps) => {
 
       {/* Meta Info */}
       <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-        {post.author && <span>👤 {post.author}</span>}
-        {post.date && <span>📅 {post.date}</span>}
+        {post.author && <span>By {post.author}</span>}
+        {post.date && <span>{post.date}</span>}
         <span>⏱️ {post.readTime}</span>
       </div>
 

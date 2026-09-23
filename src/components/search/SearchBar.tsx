@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SearchResults from "./SearchResults";
 import { searchService } from "../../services/searchService";
 import type { SearchResult } from "../../data/mockSearchData";
+import { Search as SearchIcon } from "lucide-react";
 
 interface SearchBarProps {
   variant?: "header" | "full";
@@ -97,9 +98,7 @@ const SearchBar = ({ variant = "header", onResultClick }: SearchBarProps) => {
             placeholder="Search blog posts, videos, and pages..."
             className="w-full rounded-panel border border-line bg-surface px-5 py-4 pl-12 text-base text-content placeholder:text-content-muted focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
           />
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-slate-400 dark:text-slate-500">
-            🔍
-          </span>
+          <SearchIcon aria-hidden="true" className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
         </div>
 
         {isOpen && (
@@ -130,9 +129,7 @@ const SearchBar = ({ variant = "header", onResultClick }: SearchBarProps) => {
         placeholder="Search..."
         className="w-full min-w-0 rounded-control border border-line bg-surface px-3 py-2 pl-9 text-sm text-content placeholder:text-content-muted focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus/20 sm:w-48"
       />
-      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 dark:text-slate-500">
-        🔍
-      </span>
+      <SearchIcon aria-hidden="true" className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500" />
 
       {isOpen && query.trim() && (
         <div className="absolute left-1/2 right-auto top-full z-50 mt-2 w-[min(31.25rem,calc(100vw-2rem))] -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0">

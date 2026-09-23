@@ -1,26 +1,27 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
+import { BookOpen, Bookmark, Brain, ChevronLeft, Home, MessageSquare, Settings, Shield, Sparkles, User, Video } from "lucide-react";
 
 interface SidebarLink {
   label: string;
   path: string;
-  icon: string;
+  icon: typeof Home;
 }
 
 const sidebarLinks: SidebarLink[] = [
-  { label: "Home", path: "/", icon: "🏠" },
-  { label: "Articles", path: "/blog", icon: "📚" },
-  { label: "Tutorials", path: "/videos", icon: "▶️" },
-  { label: "Quizzes", path: "/quiz", icon: "🧠" },
-  { label: "AI Assistant", path: "/assistant", icon: "✨" },
-  { label: "Community", path: "/community", icon: "💬" },
-  { label: "Bookmarks", path: "/bookmarks", icon: "🔖" },
+  { label: "Home", path: "/", icon: Home },
+  { label: "Articles", path: "/blog", icon: BookOpen },
+  { label: "Tutorials", path: "/videos", icon: Video },
+  { label: "Quizzes", path: "/quiz", icon: Brain },
+  { label: "AI Assistant", path: "/assistant", icon: Sparkles },
+  { label: "Community", path: "/community", icon: MessageSquare },
+  { label: "Bookmarks", path: "/bookmarks", icon: Bookmark },
 ];
 
 const accountLinks: SidebarLink[] = [
-  { label: "Profile", path: "/profile", icon: "👤" },
-  { label: "Settings", path: "/settings", icon: "⚙️" },
+  { label: "Profile", path: "/profile", icon: User },
+  { label: "Settings", path: "/settings", icon: Settings },
 ];
 
 interface SidebarProps {
@@ -68,7 +69,7 @@ const Sidebar = ({ isOpen = true, onClose }: SidebarProps) => {
               title="Collapse sidebar"
               aria-label="Collapse sidebar"
             >
-              <span className="text-lg">◀</span>
+              <ChevronLeft className="h-4 w-4" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -90,7 +91,7 @@ const Sidebar = ({ isOpen = true, onClose }: SidebarProps) => {
                 }
                 title={collapsed ? link.label : undefined}
               >
-                <span aria-hidden="true" className="w-6 text-center text-base">{link.icon}</span>
+                <link.icon aria-hidden="true" className="h-4 w-4 shrink-0" />
                 {!collapsed && <span className="text-sm font-medium">{link.label}</span>}
               </NavLink>
             ))}
@@ -107,7 +108,7 @@ const Sidebar = ({ isOpen = true, onClose }: SidebarProps) => {
                 }
                 title={collapsed ? "Admin Panel" : undefined}
               >
-                <span aria-hidden="true" className="w-6 text-center text-base">🛠️</span>
+                <Shield aria-hidden="true" className="h-4 w-4 shrink-0" />
                 {!collapsed && <span className="text-sm font-medium">Admin Panel</span>}
               </NavLink>
             )}
@@ -132,7 +133,7 @@ const Sidebar = ({ isOpen = true, onClose }: SidebarProps) => {
                 }
                 title={collapsed ? link.label : undefined}
               >
-                <span aria-hidden="true" className="w-6 text-center text-base">{link.icon}</span>
+                <link.icon aria-hidden="true" className="h-4 w-4 shrink-0" />
                 {!collapsed && <span className="text-sm font-medium">{link.label}</span>}
               </NavLink>
             ))}

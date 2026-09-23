@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { Rocket } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { tutorialService } from "../../services/tutorialService";
 import { quizService } from "../../services/quizService";
@@ -62,7 +63,7 @@ const Dashboard = () => {
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="text-center">
           <h1 className="text-4xl font-bold">
-            Welcome back, {user?.name || user?.email?.split("@")[0] || "Developer"} 👋
+            Welcome back, {user?.name || user?.email?.split("@")[0] || "Developer"}
           </h1>
           <p className="mt-8 text-gray-600">Loading your dashboard...</p>
         </div>
@@ -84,7 +85,7 @@ const Dashboard = () => {
       {/* Welcome Header */}
       <div className="mb-10">
         <h1 className="text-4xl font-bold">
-          Welcome back, {user?.name || user?.email?.split("@")[0] || "Developer"} 👋
+          Welcome back, {user?.name || user?.email?.split("@")[0] || "Developer"}
         </h1>
         <p className="mt-2 text-gray-600">
           Pick up where you left off and continue learning.
@@ -207,7 +208,7 @@ const Dashboard = () => {
       {/* Recommended Tutorials - will be enhanced with AI recommendations later */}
       {learningData?.inProgress?.length === 0 && (
         <div className="text-center py-12">
-          <div className="text-6xl mb-4">🚀</div>
+          <Rocket aria-hidden="true" className="mx-auto mb-4 h-14 w-14 text-blue-600" />
           <h3 className="text-2xl font-bold text-gray-900 mb-2">Start Your Learning Journey</h3>
           <p className="text-gray-600 mb-6">Browse our tutorials to get started</p>
           <a 

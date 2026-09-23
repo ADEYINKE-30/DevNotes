@@ -153,12 +153,12 @@ const VideoDetails = () => {
                   {/* Lesson Header */}
                   <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
                     <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 text-5xl">📹</div>
+                      <div className="flex-shrink-0 text-xl font-semibold">Video</div>
                       <div className="flex-1">
                         <h2 className="text-2xl font-bold mb-2">{currentLesson.title}</h2>
                         <p className="text-blue-100">{currentLesson.description}</p>
                         <div className="mt-3 flex items-center gap-3 text-sm text-blue-100">
-                          <span>⏱️ {currentLesson.duration}</span>
+                          <span>{currentLesson.duration}</span>
                           <span>•</span>
                           <span>Lesson {currentLesson.order}</span>
                         </div>
@@ -169,14 +169,14 @@ const VideoDetails = () => {
                   {/* Lesson Content */}
                   <div className="p-6">
                     <div className="prose max-w-none">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3">📝 Lesson Content</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Lesson Content</h3>
                       <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{currentLesson.content}</p>
                     </div>
 
                     {/* Resources */}
                     {currentLesson.resources && currentLesson.resources.length > 0 && (
                       <div className="mt-6 pt-6 border-t border-gray-200">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">📚 Resources</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Resources</h3>
                         <div className="space-y-2">
                           {currentLesson.resources.map((resource: any, index: number) => (
                             <a
@@ -197,7 +197,7 @@ const VideoDetails = () => {
                     {/* Video Not Available Notice */}
                     <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                       <div className="flex items-start gap-3">
-                        <span className="text-2xl">ℹ️</span>
+                        <span className="text-sm font-semibold">Info</span>
                         <div>
                           <p className="font-medium text-yellow-900">Video Coming Soon</p>
                           <p className="text-sm text-yellow-700 mt-1">
@@ -214,7 +214,7 @@ const VideoDetails = () => {
           ) : (
             <div className="aspect-video w-full rounded-lg bg-gray-100 flex items-center justify-center">
               <div className="text-center">
-                <div className="text-6xl mb-4">🎥</div>
+                <div className="mb-4 text-2xl font-semibold">Video</div>
                 <p className="text-gray-600">
                   {lessons.length > 0 ? "Select a lesson to start learning" : "No lessons available"}
                 </p>
@@ -229,9 +229,9 @@ const VideoDetails = () => {
                   {tutorial.title}
                 </h1>
                 <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                  <span>👤 {tutorial.instructor}</span>
-                  <span>⏱️ {tutorial.duration} min</span>
-                  <span>📚 {lessons.length} lessons</span>
+                  <span>By {tutorial.instructor}</span>
+                  <span>{tutorial.duration} min</span>
+                  <span>{lessons.length} lessons</span>
                 </div>
               </div>
               <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
@@ -345,12 +345,12 @@ const VideoDetails = () => {
                     <h3 className="text-lg font-semibold text-gray-900">{quiz.title}</h3>
                     <p className="mt-2 text-sm text-gray-600">{quiz.description}</p>
                     <div className="mt-4 flex flex-wrap gap-4 text-sm text-gray-500">
-                      <span>📝 {quiz.questions?.length || 0} questions</span>
-                      {quiz.timeLimit && <span>⏱️ {quiz.timeLimit} min</span>}
-                      <span>✅ Pass: {quiz.passingScore}%</span>
+                      <span>{quiz.questions?.length || 0} questions</span>
+                      {quiz.timeLimit && <span>{quiz.timeLimit} min</span>}
+                      <span>Pass: {quiz.passingScore}%</span>
                     </div>
                   </div>
-                  <span className="text-2xl">🎯</span>
+                  <span className="text-2xl font-semibold">Quiz</span>
                 </div>
                 <div className="mt-4">
                   <span className="inline-flex items-center text-sm font-semibold text-blue-600">

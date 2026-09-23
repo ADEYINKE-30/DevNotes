@@ -42,7 +42,7 @@ const Bookmarks = () => {
                       className="h-full w-full object-cover group-hover:scale-110 transition-transform"
                     />
                   ) : (
-                    <div className="text-4xl">📚</div>
+                    <div className="text-4xl">Articles</div>
                   )}
                 </div>
 
@@ -86,7 +86,7 @@ const Bookmarks = () => {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center rounded-xl border border-slate-700 border-dashed bg-slate-900/50 py-16">
-            <div className="text-5xl mb-4">🔖</div>
+            <div className="mb-4 text-2xl font-semibold">No bookmarks</div>
             <h3 className="text-xl font-semibold text-slate-300">No Bookmarks Yet</h3>
             <p className="mt-2 text-slate-400">
               Start bookmarking articles and tutorials you want to revisit.

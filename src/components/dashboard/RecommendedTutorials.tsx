@@ -39,7 +39,7 @@ const RecommendedTutorials = ({ tutorials }: RecommendedTutorialsProps) => {
 
             <div className="mt-4 flex items-center gap-4 text-xs text-gray-400">
               <span>⏱️ {tutorial.readTime}</span>
-              {tutorial.author && <span>👤 {tutorial.author}</span>}
+              {tutorial.author && <span>By {tutorial.author}</span>}
             </div>
           </Link>
         ))}

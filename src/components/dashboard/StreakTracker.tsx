@@ -1,4 +1,5 @@
 import type { StreakData } from "../../data/mockProgress";
+import { Flame } from "lucide-react";
 
 interface StreakTrackerProps {
   streak: StreakData;
@@ -11,7 +12,7 @@ const StreakTracker = ({ streak }: StreakTrackerProps) => {
     <section className="rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-white">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Learning Streak 🔥</h2>
+          <h2 className="flex items-center gap-2 text-2xl font-bold"><Flame aria-hidden="true" className="h-6 w-6 text-orange-500" /> Learning Streak</h2>
           <p className="mt-2 text-blue-100">
             You're on a{" "}
             <strong className="text-white">{streak.currentStreak}-day</strong>{" "}

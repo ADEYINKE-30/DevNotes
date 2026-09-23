@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 import type { SearchResult } from "../../data/mockSearchData";
+import { ClipboardList, FileText, PlaySquare } from "lucide-react";
 
 interface SearchResultCardProps {
   result: SearchResult;
   onClick?: () => void;
 }
 
-const typeIcons: Record<string, string> = {
-  blog: "📄",
-  video: "🎬",
-  page: "📋",
+const typeIcons: Record<string, typeof FileText> = {
+  blog: FileText,
+  video: PlaySquare,
+  page: ClipboardList,
 };
 
 const SearchResultCard = ({ result, onClick }: SearchResultCardProps) => {
@@ -19,7 +20,10 @@ const SearchResultCard = ({ result, onClick }: SearchResultCardProps) => {
       onClick={onClick}
       className="flex items-start gap-4 rounded-lg border border-gray-200 bg-white p-4 transition hover:border-blue-300 hover:shadow-sm"
     >
-      <span className="mt-0.5 text-xl">{typeIcons[result.type] || "📄"}</span>
+      {(() => {
+        const Icon = typeIcons[result.type] || FileText;
+        return <Icon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-gray-500" />;
+      })()}
       <div className="min-w-0 flex-1">
         <div className="flex min-w-0 items-center gap-2">
           <h3 className="min-w-0 flex-1 truncate text-sm font-semibold text-gray-900">

@@ -71,19 +71,19 @@ const Profile = () => {
         .map((item: any) => ({
           activity: `${item.completedAt ? "Completed" : "Started"} ${item.tutorial?.title || "tutorial"}`,
           time: item.lastWatchedAt || item.completedAt || item.startedAt,
-          icon: item.completedAt ? "✅" : "▶️",
+          icon: item.completedAt ? "completed" : "started",
           href: "/videos",
         }));
       const quizActivity: RecentActivity[] = quizData.attempts.slice(0, 2).map((attempt) => ({
         activity: `Completed quiz with ${attempt.percentage}%`,
         time: attempt.submittedAt || attempt.startedAt,
-        icon: "🎯",
+        icon: "quiz",
         href: "/quiz",
       }));
       const bookmarkActivity: RecentActivity[] = bookmarks.slice(0, 2).map((bookmark) => ({
         activity: `Bookmarked: ${bookmark.title}`,
         time: bookmark.createdAt,
-        icon: "🔖",
+        icon: "bookmark",
         href: "/bookmarks",
       }));
 
@@ -122,7 +122,7 @@ const Profile = () => {
 
           <div className="mb-8 rounded-xl border border-purple-500/30 bg-gradient-to-br from-slate-800 to-slate-900 p-8">
             <div className="flex items-center gap-6">
-              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-purple-600 text-4xl">🛠️</div>
+              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-purple-600 text-xl font-semibold text-white">Admin</div>
               <div>
                 <h2 className="text-3xl font-bold text-white">{user.name || user.email}</h2>
                 <p className="mt-1 font-medium text-purple-400">Platform Administrator</p>
@@ -133,10 +133,10 @@ const Profile = () => {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { label: "Articles", value: adminCounts.articles, href: "/admin/articles", icon: "📝" },
-              { label: "Tutorials", value: adminCounts.tutorials, href: "/admin/videos", icon: "🎥" },
-              { label: "Quizzes", value: adminCounts.quizzes, href: "/admin/quizzes", icon: "🧪" },
-              { label: "Discussions", value: adminCounts.discussions, href: "/community", icon: "💬" },
+              { label: "Articles", value: adminCounts.articles, href: "/admin/articles", icon: "Articles" },
+              { label: "Tutorials", value: adminCounts.tutorials, href: "/admin/videos", icon: "Videos" },
+              { label: "Quizzes", value: adminCounts.quizzes, href: "/admin/quizzes", icon: "Quizzes" },
+              { label: "Discussions", value: adminCounts.discussions, href: "/community", icon: "Community" },
             ].map((item) => (
               <Link key={item.label} to={item.href} className="rounded-xl border border-slate-700 bg-slate-800 p-6 transition hover:-translate-y-1 hover:border-purple-500">
                 <span className="text-3xl">{item.icon}</span>
@@ -184,7 +184,7 @@ const Profile = () => {
         <div className="rounded-xl border border-slate-700 bg-gradient-to-br from-slate-800 to-slate-900 p-8 mb-8">
           <div className="flex flex-col gap-6 md:flex-row md:items-center">
             <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-4xl">
-              👤
+              User
             </div>
 
             <div className="flex-1">
@@ -200,13 +200,13 @@ const Profile = () => {
 
               <div className="mt-4 flex gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-lg">🏆</span>
+                  <span className="text-sm font-semibold">Level</span>
                   <span className="text-sm text-slate-300">
                     Level 12 Developer
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-lg">🔥</span>
+                  <span className="text-sm font-semibold">Streak</span>
                   <span className="text-sm text-slate-300">
                     {stats.currentStreak} day streak
                   </span>
@@ -219,12 +219,12 @@ const Profile = () => {
         {/* Stats Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
           {[
-            { icon: "📚", label: "Articles Read", value: stats.articlesRead, href: "/blog" },
-            { icon: "▶️", label: "Tutorials Watched", value: stats.tutorialsWatched, href: "/videos" },
-            { icon: "🧠", label: "Quizzes Completed", value: stats.quizzesCompleted, href: "/quiz" },
-            { icon: "🔥", label: "Current Streak", value: `${stats.currentStreak} days`, href: "/dashboard" },
-            { icon: "🔖", label: "Saved Resources", value: stats.savedResources, href: "/bookmarks" },
-            { icon: "⭐", label: "XP Earned", value: stats.xpEarned, href: "/dashboard" },
+            { icon: "Articles", label: "Articles Read", value: stats.articlesRead, href: "/blog" },
+            { icon: "Tutorials", label: "Tutorials Watched", value: stats.tutorialsWatched, href: "/videos" },
+            { icon: "Quizzes", label: "Quizzes Completed", value: stats.quizzesCompleted, href: "/quiz" },
+            { icon: "Streak", label: "Current Streak", value: `${stats.currentStreak} days`, href: "/dashboard" },
+            { icon: "Bookmarks", label: "Saved Resources", value: stats.savedResources, href: "/bookmarks" },
+            { icon: "XP", label: "XP Earned", value: stats.xpEarned, href: "/dashboard" },
           ].map((stat) => (
             <Link
               key={stat.label}

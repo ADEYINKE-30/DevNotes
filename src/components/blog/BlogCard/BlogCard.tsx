@@ -1,5 +1,6 @@
 import type { BlogPost } from "../../../types";
 import { Link } from "react-router-dom";
+import { Clock, FileText } from "lucide-react";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -20,7 +21,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           />
         ) : (
           <div className="flex items-center justify-center text-slate-400 dark:text-slate-500">
-            📄
+            <FileText aria-hidden="true" className="h-10 w-10" />
           </div>
         )}
       </div>
@@ -42,7 +43,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
 
         {/* Metadata & CTA */}
         <div className="mt-auto flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-700">
-          <small className="text-slate-500 dark:text-slate-500">⏱️ {post.readTime}</small>
+          <small className="flex items-center gap-1 text-slate-500 dark:text-slate-500"><Clock aria-hidden="true" className="h-3.5 w-3.5" /> {post.readTime}</small>
 
           <Link
             to={`/blog/${post.slug}`}

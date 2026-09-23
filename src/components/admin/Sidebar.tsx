@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
+import { BarChart3, Beaker, FileText, LayoutDashboard, PlaySquare, Users } from "lucide-react";
 
 const adminLinks = [
-  { path: "/admin", label: "Dashboard", icon: "📊" },
-  { path: "/admin/articles", label: "Articles", icon: "📝" },
-  { path: "/admin/videos", label: "Videos", icon: "🎥" },
-  { path: "/admin/users", label: "Users", icon: "👥" },
-  { path: "/admin/quizzes", label: "Quizzes", icon: "🧪" },
-  { path: "/admin/analytics", label: "Analytics", icon: "📈" },
+  { path: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { path: "/admin/articles", label: "Articles", icon: FileText },
+  { path: "/admin/videos", label: "Videos", icon: PlaySquare },
+  { path: "/admin/users", label: "Users", icon: Users },
+  { path: "/admin/quizzes", label: "Quizzes", icon: Beaker },
+  { path: "/admin/analytics", label: "Analytics", icon: BarChart3 },
 ];
 
 const Sidebar = () => {
@@ -29,7 +30,7 @@ const Sidebar = () => {
               }`
             }
           >
-            <span className="text-lg">{link.icon}</span>
+            <link.icon className="h-4 w-4" aria-hidden="true" />
             {link.label}
           </NavLink>
         ))}

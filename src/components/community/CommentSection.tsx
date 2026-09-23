@@ -104,7 +104,7 @@ const CommentSection = ({ discussionId, comments, onCommentsChange }: CommentSec
           {comments.map((comment) => (
             <div key={comment._id} className="px-6 py-4">
               <div className="flex items-center gap-2">
-                <span className="text-lg">{comment.author.avatar || "👤"}</span>
+                <span className="text-sm font-semibold">{comment.author.avatar || "User"}</span>
                 <span className="text-sm font-medium text-gray-900">{comment.author.name}</span>
                 <span className="text-xs text-gray-400">
                   {new Date(comment.createdAt).toLocaleDateString(undefined, {

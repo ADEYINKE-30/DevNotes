@@ -5,11 +5,11 @@ const Analytics = () => {
     <div>
       <h1 className="mb-8 text-2xl font-bold text-gray-900">Analytics</h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <StatsCard title="Page Views" value="12,847" icon="👁️" change="+18% this month" changeType="positive" />
-        <StatsCard title="Active Users" value="1,234" icon="📊" change="+7% this month" changeType="positive" />
-        <StatsCard title="Bounce Rate" value="32.5%" icon="📉" change="-2.1% this month" changeType="positive" />
+        <StatsCard title="Page Views" value="12,847" icon="views" change="+18% this month" changeType="positive" />
+        <StatsCard title="Active Users" value="1,234" icon="users" change="+7% this month" changeType="positive" />
+        <StatsCard title="Bounce Rate" value="32.5%" icon="bounce" change="-2.1% this month" changeType="positive" />
         <StatsCard title="Avg. Session" value="4m 32s" icon="⏱️" change="+12s this month" changeType="positive" />
-        <StatsCard title="New Signups" value="89" icon="🎉" change="+23 this week" changeType="positive" />
+        <StatsCard title="New Signups" value="89" icon="signups" change="+23 this week" changeType="positive" />
         <StatsCard title="Course Completion" value="67%" icon="✅" change="+5% this month" changeType="positive" />
       </div>
 

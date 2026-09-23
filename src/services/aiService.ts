@@ -146,7 +146,7 @@ const knowledgeBase: Record<string, string> = {
 
   // === Default / General ===
   default:
-    "I'm your versatile AI learning assistant! I can help you with a wide range of technologies including:\n\n🌐 **HTML/CSS**: HTML5, Canvas, SVG, DOM, CSS, Tailwind, Bootstrap, Sass\n🎨 **Frontend**: React, Vue, Angular, Next.js, Svelte, TypeScript\n🖥️ **Backend**: Node.js, Express, NestJS, Python, Django, Flask, FastAPI, Java, Spring Boot, Go, PHP, Laravel\n🗄️ **Databases**: PostgreSQL, MySQL, MongoDB, Redis, Prisma, TypeORM\n☁️ **DevOps**: Docker, Kubernetes, AWS, Azure, GCP, CI/CD, GitHub Actions\n📱 **Mobile**: React Native, Flutter, Swift\n🔧 **Languages**: JavaScript, TypeScript, Python, Java, Kotlin, Go, Rust, C++, PHP, Swift\n🧪 **Testing**: Jest, Cypress, Playwright, Vitest\n🚀 **Build Tools**: Vite, Webpack, esbuild\n🤖 **ML/AI**: TensorFlow, PyTorch\n\nWhat would you like to learn about today?",
+    "I'm your versatile AI learning assistant! I can help you with a wide range of technologies including:\n\n**HTML/CSS**: HTML5, Canvas, SVG, DOM, CSS, Tailwind, Bootstrap, Sass\n**Frontend**: React, Vue, Angular, Next.js, Svelte, TypeScript\n**Backend**: Node.js, Express, NestJS, Python, Django, Flask, FastAPI, Java, Spring Boot, Go, PHP, Laravel\n**Databases**: PostgreSQL, MySQL, MongoDB, Redis, Prisma, TypeORM\n**DevOps**: Docker, Kubernetes, AWS, Azure, GCP, CI/CD, GitHub Actions\n**Mobile**: React Native, Flutter, Swift\n**Languages**: JavaScript, TypeScript, Python, Java, Kotlin, Go, Rust, C++, PHP, Swift\n**Testing**: Jest, Cypress, Playwright, Vitest\n**Build Tools**: Vite, Webpack, esbuild\n**ML/AI**: TensorFlow, PyTorch\n\nWhat would you like to learn about today?",
 };
 
 const suggestions: AISuggestion[] = [

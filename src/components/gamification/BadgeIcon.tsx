@@ -1,4 +1,5 @@
 import type { Badge } from "../../data/mockGamification";
+import { Award, BookOpen, Flame, Medal, PlaySquare, Puzzle, Star, Trophy } from "lucide-react";
 
 interface BadgeIconProps {
   badge: Badge;
@@ -7,6 +8,8 @@ interface BadgeIconProps {
 
 const BadgeIcon = ({ badge, size = "md" }: BadgeIconProps) => {
   const isUnlocked = !!badge.unlockedAt;
+  const badgeIcons = { award: Award, book: BookOpen, flame: Flame, medal: Medal, play: PlaySquare, puzzle: Puzzle, star: Star, trophy: Trophy };
+  const Icon = badgeIcons[badge.icon as keyof typeof badgeIcons] || Award;
 
   const sizeClasses = {
     sm: "h-10 w-10 text-sm",
@@ -23,7 +26,7 @@ const BadgeIcon = ({ badge, size = "md" }: BadgeIconProps) => {
             : "bg-gray-100 ring-1 ring-gray-200 grayscale"
         }`}
       >
-        <span className={isUnlocked ? "" : "opacity-40"}>{badge.icon}</span>
+        <Icon aria-hidden="true" className={isUnlocked ? "" : "opacity-40"} />
       </div>
       <span className={`text-center text-[10px] font-medium ${
         isUnlocked ? "text-gray-700" : "text-gray-400"

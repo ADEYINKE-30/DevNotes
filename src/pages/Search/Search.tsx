@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { useState, useEffect, useCallback } from "react";
 import SearchBar from "../../components/search/SearchBar";
 import SearchResultCard from "../../components/search/SearchResultCard";
+import { Search as SearchIcon } from "lucide-react";
 import { searchService } from "../../services/searchService";
 import type { SearchResult } from "../../data/mockSearchData";
 
@@ -67,7 +68,7 @@ const Search = () => {
             </div>
           ) : (
             <div className="py-20 text-center">
-              <p className="text-3xl">🔍</p>
+              <SearchIcon aria-hidden="true" className="mx-auto h-8 w-8 text-gray-400" />
               <p className="mt-2 text-lg font-medium text-gray-900">No results found</p>
               <p className="mt-1 text-sm text-gray-500">
                 No results for "{queryParam}". Try a different search term.

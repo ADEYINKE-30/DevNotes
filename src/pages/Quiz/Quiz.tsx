@@ -191,7 +191,7 @@ const Quiz = () => {
 
         {allQuizzes.length === 0 ? (
           <div className="py-20 text-center">
-            <div className="text-6xl mb-4">📝</div>
+            <div className="mb-4 text-2xl font-semibold">Quiz</div>
             <p className="text-lg text-gray-500">No quizzes available yet.</p>
             <p className="mt-2 text-sm text-gray-400">
               Check back later or explore our tutorials.
@@ -218,7 +218,7 @@ const Quiz = () => {
                     
                     <div className="mt-4 flex flex-wrap gap-3 text-sm text-gray-500">
                       <span className="flex items-center gap-1">
-                        <span>📝</span>
+                        <span>Question</span>
                         {quizItem.questions?.length || 0} questions
                       </span>
                       {quizItem.timeLimit && (
@@ -241,7 +241,7 @@ const Quiz = () => {
                       </div>
                     )}
                   </div>
-                  <span className="text-3xl">🎯</span>
+                  <span className="text-3xl">Target</span>
                 </div>
                 
                 <div className="mt-4 pt-4 border-t border-gray-200">
@@ -327,7 +327,7 @@ const Quiz = () => {
 
       {phase === "start" && (
         <div className="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm">
-          <div className="text-5xl">📝</div>
+          <div className="text-2xl font-semibold">Quiz</div>
           <h1 className="mt-4 text-2xl font-bold text-gray-900">{quiz.title}</h1>
           <p className="mt-2 text-gray-600">
             {quiz.description || `Test your knowledge with ${questions.length} questions.`}

@@ -193,10 +193,10 @@ const Thread = () => {
         <p className="mt-4 text-gray-700 leading-relaxed">{discussion.content}</p>
         <div className="mt-4 flex items-center gap-4 text-sm text-gray-500">
           <span className="flex items-center gap-1">
-            <span className="text-lg">{discussion.author.avatar || "👤"}</span>
+            <span className="text-sm font-semibold">{discussion.author.avatar || "User"}</span>
             {discussion.author.name}
           </span>
-          <span>📅 {new Date(discussion.createdAt).toLocaleDateString()}</span>
+          <span>{new Date(discussion.createdAt).toLocaleDateString()}</span>
         </div>
         {discussion.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
