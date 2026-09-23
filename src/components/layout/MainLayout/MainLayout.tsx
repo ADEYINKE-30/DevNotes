@@ -17,21 +17,21 @@ const MainLayout = () => {
   const showSidebar = !noSidebarPages.includes(location.pathname);
 
   return (
-    <div className="flex min-h-screen bg-canvas text-content">
+    <div className="flex h-screen overflow-hidden bg-canvas text-content">
       {/* Sidebar */}
       {showSidebar && (
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       )}
 
       {/* Main Content Area */}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 min-h-0 flex-1 flex-col">
         {/* Header */}
         {showSidebar && (
           <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         )}
 
         {/* Page Content */}
-        <main className="min-w-0 flex-1 overflow-y-auto">
+        <main className="min-h-0 min-w-0 flex-1 overflow-y-auto">
           <Outlet />
         </main>
 
