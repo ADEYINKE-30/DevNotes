@@ -21,8 +21,8 @@ const SearchResultCard = ({ result, onClick }: SearchResultCardProps) => {
     >
       <span className="mt-0.5 text-xl">{typeIcons[result.type] || "📄"}</span>
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold text-gray-900 truncate">
+        <div className="flex min-w-0 items-center gap-2">
+          <h3 className="min-w-0 flex-1 truncate text-sm font-semibold text-gray-900">
             {result.title}
           </h3>
           <span className="shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-gray-500">

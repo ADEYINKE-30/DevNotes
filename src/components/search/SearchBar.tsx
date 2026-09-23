@@ -135,7 +135,7 @@ const SearchBar = ({ variant = "header", onResultClick }: SearchBarProps) => {
       </span>
 
       {isOpen && query.trim() && (
-        <div className="absolute right-0 top-full z-50 mt-2 w-[min(31.25rem,calc(100vw-2rem))]">
+        <div className="absolute left-1/2 right-auto top-full z-50 mt-2 w-[min(31.25rem,calc(100vw-2rem))] -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0">
           <SearchResults
             results={results}
             query={query}
