@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import { BookOpen, Bookmark, Brain, ChevronLeft, Home, MessageSquare, Settings, Shield, Sparkles, User, Video } from "lucide-react";
+import { BookOpen, Bookmark, Brain, ChevronLeft, Home, MessageSquare, Settings, Shield, Sparkles, User, Users, Video } from "lucide-react";
 
 interface SidebarLink {
   label: string;
@@ -96,21 +96,39 @@ const Sidebar = ({ isOpen = true, onClose }: SidebarProps) => {
               </NavLink>
             ))}
             {user?.role === "admin" && (
-              <NavLink
-                to="/admin"
-                onClick={onClose}
-                className={({ isActive }) =>
-                  `flex items-center gap-3 rounded-control border-l-2 px-3 py-2.5 transition-colors ${
-                    isActive
-                      ? "border-accent bg-accent-subtle text-accent"
-                      : "border-transparent text-content-secondary hover:bg-canvas hover:text-content"
-                  } ${collapsed ? "justify-center px-3" : ""}`
-                }
-                title={collapsed ? "Admin Panel" : undefined}
-              >
-                <Shield aria-hidden="true" className="h-4 w-4 shrink-0" />
-                {!collapsed && <span className="text-sm font-medium">Admin Panel</span>}
-              </NavLink>
+              <>
+                <NavLink
+                  to="/admin"
+                  end
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 rounded-control border-l-2 px-3 py-2.5 transition-colors ${
+                      isActive
+                        ? "border-accent bg-accent-subtle text-accent"
+                        : "border-transparent text-content-secondary hover:bg-canvas hover:text-content"
+                    } ${collapsed ? "justify-center px-3" : ""}`
+                  }
+                  title={collapsed ? "Admin Panel" : undefined}
+                >
+                  <Shield aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  {!collapsed && <span className="text-sm font-medium">Admin Panel</span>}
+                </NavLink>
+                <NavLink
+                  to="/admin/users"
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 rounded-control border-l-2 px-3 py-2.5 transition-colors ${
+                      isActive
+                        ? "border-accent bg-accent-subtle text-accent"
+                        : "border-transparent text-content-secondary hover:bg-canvas hover:text-content"
+                    } ${collapsed ? "justify-center px-3" : ""}`
+                  }
+                  title={collapsed ? "Manage Users" : undefined}
+                >
+                  <Users aria-hidden="true" className="h-4 w-4 shrink-0" />
+                  {!collapsed && <span className="text-sm font-medium">Manage Users</span>}
+                </NavLink>
+              </>
             )}
           </div>
 
