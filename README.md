@@ -2,297 +2,169 @@
 
 **Learn. Build. Share.**
 
-DevNotes is a full-stack developer learning and blogging platform designed to help developers learn programming concepts, explore practical tutorials, test their knowledge through quizzes, and engage with developer-focused content.
+DevNotes is a developer learning and blogging platform. It combines practical articles, video tutorials, quizzes, progress tracking, community features, and an AI learning assistant in one responsive React application.
 
-## 🚀 Features
+This repository contains the frontend. It connects to a separately hosted backend API for application data and JWT authentication.
 
-* 📚 **Developer Articles** — Read practical articles covering web development and programming.
-* 🎥 **Video Tutorials** — Learn through structured tutorials and video lessons.
-* 🧠 **Quizzes** — Test your understanding with interactive programming quizzes.
-* 🤖 **AI Assistant** — Get programming explanations and learning support.
-* 🔐 **Authentication** — Secure user registration and login using JWT authentication.
-* 👤 **User Profiles** — Manage your profile and account information.
-* 🛠️ **Admin Dashboard** — Manage platform content and users.
-* 🌙 **Dark Mode** — Switch between light and dark themes.
-* 🔎 **Search** — Find relevant articles and learning content.
-* 📱 **Responsive Design** — Designed to work across desktop, tablet, and mobile devices.
+## Features
 
-## 🛠️ Tech Stack
+- Developer articles and practical programming content
+- Video tutorials and structured learning paths
+- Interactive quizzes and progress tracking
+- AI assistant with online and offline response support
+- JWT-based registration, login, profiles, and protected routes
+- Community discussions, reactions, bookmarks, and notifications
+- Admin dashboard for managing platform content
+- Search across articles and learning content
+- Light and dark themes
+- Responsive layouts for desktop, tablet, and mobile
+
+## Tech Stack
 
 ### Frontend
 
-* React
-* TypeScript
-* Vite
-* Tailwind CSS
-* React Router
-* HTML5
-* CSS3
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
 
-### Backend
+### Integrated Services
 
-* Node.js
-* Express.js
-* TypeScript
-* MongoDB
-* Mongoose
-* JWT Authentication
+- REST API for articles, tutorials, quizzes, users, and authentication
+- JWT bearer tokens for authenticated API requests
+- Firebase Firestore for contact message storage
+- EmailJS for contact email delivery
 
 ### Development Tools
 
-* Git
-* GitHub
-* pnpm
-* npm
-* VS Code
-* GitHub Copilot
-* AI-assisted development tools
+- pnpm
+- Git and GitHub
+- VS Code
+- Oxlint
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 DevNotes/
+├── public/
 ├── src/
+│   ├── app/
+│   │   ├── components/
+│   │   └── ...
 │   ├── components/
+│   ├── config/
+│   ├── constants/
 │   ├── context/
+│   ├── data/
+│   ├── hooks/
+│   ├── lib/
 │   ├── pages/
 │   ├── routes/
 │   ├── services/
+│   ├── styles/
 │   ├── types/
-│   ├── hooks/
-│   ├── constants/
-│   ├── utils/
 │   └── main.tsx
-│
-├── server/
-│   └── src/
-│       ├── controllers/
-│       ├── models/
-│       ├── routes/
-│       ├── services/
-│       ├── middleware/
-│       └── scripts/
-│
-├── public/
+├── .env.example
 ├── package.json
 └── README.md
 ```
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 
-Make sure you have installed:
+- Node.js 18 or newer
+- pnpm
+- Access to the DevNotes backend API, or a locally running compatible backend
+- Firebase and EmailJS projects if you want to use the contact form
 
-* Node.js
-* pnpm
-* MongoDB
-
-### 1. Clone the repository
+### Installation
 
 ```bash
 git clone https://github.com/ADEYINKE-30/DevNotes.git
 cd DevNotes
-```
-
-### 2. Install frontend dependencies
-
-```bash
 pnpm install
 ```
 
-### 3. Install backend dependencies
+### Environment Variables
+
+Create a `.env` file in the project root based on `.env.example`:
 
 ```bash
-cd server
-npm install
+copy .env.example .env
 ```
 
-### 4. Configure environment variables
+Configure these values as needed:
 
-Create a `.env` file inside the `server` directory.
+| Variable | Purpose |
+| --- | --- |
+| `VITE_API_URL` | Backend API base URL, including `/api` |
+| `VITE_FIREBASE_API_KEY` | Firebase project API key |
+| `VITE_FIREBASE_AUTH_DOMAIN` | Firebase authentication domain |
+| `VITE_FIREBASE_PROJECT_ID` | Firebase project ID |
+| `VITE_FIREBASE_STORAGE_BUCKET` | Firebase storage bucket |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | Firebase messaging sender ID |
+| `VITE_FIREBASE_APP_ID` | Firebase application ID |
+| `VITE_EMAILJS_SERVICE_ID` | EmailJS service ID |
+| `VITE_EMAILJS_TEMPLATE_ID` | EmailJS template ID |
+| `VITE_EMAILJS_PUBLIC_KEY` | EmailJS public key |
 
-Add the required environment variables for your local development environment.
+The frontend uses the deployed API as a fallback when `VITE_API_URL` is not set. Set `VITE_API_URL` explicitly when using a local or different backend.
 
-> Do not commit your `.env` file to GitHub.
+Do not commit `.env` or any secret credentials to GitHub.
 
-### 5. Seed the database
+### Run Locally
 
-From the `server` directory:
+Start the Vite development server:
 
 ```bash
-npm run seed:posts
-npm run seed:tutorials
-npm run seed:quizzes
-npm run seed:demo-users
+pnpm dev
 ```
 
-### 6. Start the backend
+The application will be available at the local URL printed by Vite, usually `http://localhost:5173`.
+
+### Build and Preview
 
 ```bash
-npm run dev
+pnpm build
+pnpm preview
 ```
 
-The backend runs on:
-
-```text
-http://localhost:5000
-```
-
-### 7. Start the frontend
-
-Open another terminal in the project root:
+Run the linter with:
 
 ```bash
-pnpm run dev
+pnpm lint
 ```
 
-The frontend will be available through the Vite development server.
+## Backend Integration
 
-## 🔐 Authentication
+The backend is maintained and deployed separately from this frontend repository. The frontend API client reads `VITE_API_URL` and sends JWT bearer tokens from browser storage for authenticated requests.
 
-DevNotes uses JWT-based authentication.
+The frontend expects the backend to provide endpoints for authentication, articles, tutorials, quizzes, users, bookmarks, community features, notifications, and search. Consult the backend deployment or API documentation for available endpoints and local development instructions.
 
-Users can:
+## Contact Form
 
-* Create an account
-* Log in
-* Update their profile
-* Change their password
-* Log out securely
+The contact form stores messages in Firebase Firestore and sends email through EmailJS. Both services require the corresponding environment variables from `.env.example`.
 
-The application also includes separate user roles for regular users and administrators.
+If EmailJS is not configured, the application reports that email delivery is unavailable. Firebase rules should be configured carefully before deploying the contact form publicly.
 
-## 📚 Articles
+## Authentication
 
-DevNotes provides developer-focused articles designed to explain programming concepts in a practical and beginner-friendly way.
+Authentication is handled by the external backend using JWTs. Users can register, log in, update their profile, change their password, and log out. Protected routes and authenticated API requests use the stored bearer token.
 
-Articles can include:
+## Deployment
 
-* Programming concepts
-* Code examples
-* Practical explanations
-* Development best practices
-* Web development topics
+Build the application with `pnpm build`, then deploy the generated `dist/` directory to a static hosting provider such as Netlify, Vercel, or Cloudflare Pages.
 
-## 🎥 Tutorials
+Configure the production environment variables in the hosting provider, especially `VITE_API_URL`, Firebase values, and EmailJS values.
 
-The tutorial section provides structured learning content with multiple lessons and video resources.
-
-The current platform includes:
-
-* 5 tutorials
-* 30 lessons
-
-## 🧠 Quizzes
-
-DevNotes includes interactive quizzes that allow users to test their understanding of programming topics.
-
-The current database includes:
-
-* 3 quizzes
-* 21 questions
-
-Users can start quizzes, submit answers, and view their results.
-
-## 🤖 AI Assistant
-
-DevNotes includes an AI-powered learning assistant designed to help users understand programming concepts.
-
-The assistant can provide explanations about topics such as:
-
-* HTML
-* CSS
-* JavaScript
-* TypeScript
-* React
-* Tailwind CSS
-* Git
-* GitHub
-* Node.js
-* Express.js
-* MongoDB
-* REST APIs
-* Debugging
-* Responsive web design
-
-The application supports external AI providers through environment configuration and also includes an offline fallback mode for development.
-
-## 🛡️ Admin Features
-
-Administrators have access to protected management functionality for platform administration.
-
-Admin functionality includes management areas for:
-
-* Users
-* Articles
-* Tutorials
-* Quizzes
-* Platform content
-
-## 🧪 Build
-
-To verify the frontend production build:
-
-```bash
-pnpm run build
-```
-
-To verify the backend build:
-
-```bash
-cd server
-npm run build
-```
-
-## 🔒 Security
-
-Environment variables containing secrets and credentials should never be committed to the repository.
-
-The project uses `.gitignore` to exclude sensitive and generated files such as:
-
-```text
-.env
-.env.example
-node_modules/
-dist/
-```
-
-For deployment, use secure environment variables provided by your hosting platform.
-
-## 🎯 Project Goal
-
-DevNotes was created to provide a simple and practical learning environment for developers.
-
-The goal is to make technical learning more approachable by combining:
-
-**Learning → Practice → Testing → Support**
-
-Users can learn through articles and tutorials, test their knowledge with quizzes, and use the AI assistant when they need additional explanations.
-
-## 🚧 Future Improvements
-
-Possible future improvements include:
-
-* More developer tutorials
-* More quizzes and questions
-* Expanded AI capabilities
-* Community discussions
-* Bookmarks and personalized learning
-* Improved admin analytics
-* Deployment and production infrastructure
-* Additional developer resources
-
-## 👨🏽‍💻 Author
+## Author
 
 **Adepoju Adeyinka**
-
 Software Developer
-
 Lagos, Nigeria
 
-
-
-## 📄 License
+## License
 
 This project was created as a software development portfolio and learning project.
