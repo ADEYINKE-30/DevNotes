@@ -22,7 +22,7 @@ const ChatInput = ({ onSend, disabled, placeholder = "Ask anything..." }: ChatIn
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-3">
+    <form onSubmit={handleSubmit} className="flex shrink-0 items-center gap-2 border-t border-slate-200 bg-white p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] dark:border-slate-700 dark:bg-slate-900">
       <input
         ref={inputRef}
         type="text"

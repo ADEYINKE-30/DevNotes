@@ -4,7 +4,7 @@ import ChatInput from "./ChatInput";
 import { useAIChat } from "../../hooks/useAIChat";
 import { aiService } from "../../services/aiService";
 import type { AISuggestion } from "../../services/aiService";
-import { Bot, X } from "lucide-react";
+import { Bot, RotateCcw, X } from "lucide-react";
 
 interface AIChatProps {
   isFullPage?: boolean;
@@ -22,7 +22,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
 
   const containerClasses = isFullPage
     ? "mx-auto max-w-3xl px-6 py-12"
-    : "fixed bottom-24 right-6 z-50 flex h-[600px] w-[400px] flex-col rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl";
+    : "fixed inset-x-0 bottom-0 z-50 flex h-[min(760px,calc(100dvh-1rem))] min-h-0 w-full flex-col rounded-t-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:inset-x-auto sm:bottom-24 sm:right-6 sm:h-[600px] sm:w-[400px] sm:rounded-2xl";
 
   const headerClasses = isFullPage
     ? "mb-6"
@@ -30,7 +30,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
 
   const messagesClasses = isFullPage
     ? "flex-1 space-y-4"
-    : "flex-1 space-y-4 overflow-y-auto p-4";
+    : "min-h-0 flex-1 space-y-4 overflow-y-auto p-4";
 
   if (isFullPage) {
     return (
@@ -121,7 +121,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
             className="text-xs text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"
             title="Clear chat"
           >
-            <X aria-hidden="true" className="h-4 w-4" />
+            <RotateCcw aria-hidden="true" className="h-4 w-4" />
           </button>
           {onClose && (
             <button
