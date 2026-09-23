@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react";
 import { tutorialService, type Tutorial } from "../../services/tutorialService";
 
+interface LessonDraft {
+  title: string;
+  description: string;
+  videoUrl: string;
+  duration: string;
+}
+
+const emptyLesson = (): LessonDraft => ({ title: "", description: "", videoUrl: "", duration: "" });
+
 const ManageVideos = () => {
   const [tutorials, setTutorials] = useState<Tutorial[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState("");
   const [form, setForm] = useState({
     title: "", description: "", category: "", difficulty: "Beginner" as Tutorial["difficulty"],
-    duration: "", instructor: "", thumbnail: "", videoUrl: "", videoTitle: "", videoDescription: "",
+    duration: "", instructor: "", thumbnail: "",
   });
+  const [lessons, setLessons] = useState<LessonDraft[]>([emptyLesson()]);
 
   const loadTutorials = async () => {
     const response = await tutorialService.getTutorials({ page: 1, limit: 100 });
@@ -26,11 +36,17 @@ const ManageVideos = () => {
         difficulty: form.difficulty, duration: form.duration, instructor: form.instructor,
         thumbnail: form.thumbnail, published: true, featured: false, tags: [],
       });
-      await tutorialService.createLesson(tutorial._id, {
-        title: form.videoTitle || form.title, description: form.videoDescription || form.description,
-        videoUrl: form.videoUrl, duration: form.duration, order: 1,
-      });
+      for (const [index, lesson] of lessons.entries()) {
+        await tutorialService.createLesson(tutorial._id, {
+          title: lesson.title || `${form.title} - Lesson ${index + 1}`,
+          description: lesson.description || form.description,
+          videoUrl: lesson.videoUrl,
+          duration: lesson.duration || form.duration,
+          order: index + 1,
+        });
+      }
       setShowForm(false);
+      setLessons([emptyLesson()]);
       setMessage("Video tutorial published successfully.");
       await loadTutorials();
     } catch (error: any) {
@@ -41,7 +57,7 @@ const ManageVideos = () => {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <div><h1 className="text-2xl font-bold text-gray-900">Manage Videos</h1><p className="mt-1 text-sm text-gray-500">Publish tutorials with a playable video lesson.</p></div>
+        <div><h1 className="text-2xl font-bold text-gray-900">Manage Videos</h1><p className="mt-1 text-sm text-gray-500">Publish tutorials with multiple playable lessons.</p></div>
         <button onClick={() => setShowForm((current) => !current)} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">{showForm ? "Close" : "+ New Video"}</button>
       </div>
       {message && <p className="mb-4 rounded-lg bg-blue-50 p-3 text-sm text-blue-700">{message}</p>}
@@ -54,10 +70,22 @@ const ManageVideos = () => {
           <input required placeholder="Duration (e.g. 20 min)" value={form.duration} onChange={(event) => setForm({ ...form, duration: event.target.value })} className="rounded-lg border p-3" />
           <input placeholder="Instructor" value={form.instructor} onChange={(event) => setForm({ ...form, instructor: event.target.value })} className="rounded-lg border p-3" />
           <input placeholder="Thumbnail URL" type="url" value={form.thumbnail} onChange={(event) => setForm({ ...form, thumbnail: event.target.value })} className="rounded-lg border p-3" />
-          <input required placeholder="Video URL" type="url" value={form.videoUrl} onChange={(event) => setForm({ ...form, videoUrl: event.target.value })} className="rounded-lg border p-3 md:col-span-2" />
-          <input placeholder="Lesson title" value={form.videoTitle} onChange={(event) => setForm({ ...form, videoTitle: event.target.value })} className="rounded-lg border p-3" />
-          <input placeholder="Lesson description" value={form.videoDescription} onChange={(event) => setForm({ ...form, videoDescription: event.target.value })} className="rounded-lg border p-3" />
-          <button type="submit" className="rounded-lg bg-green-600 px-4 py-3 font-semibold text-white hover:bg-green-700 md:col-span-2">Publish Video</button>
+          <div className="space-y-4 md:col-span-2">
+            <div className="flex items-center justify-between">
+              <div><h2 className="font-semibold text-gray-900">Course lessons</h2><p className="text-sm text-gray-500">Add each lesson that should appear in Course Content.</p></div>
+              <button type="button" onClick={() => setLessons((current) => [...current, emptyLesson()])} className="rounded-lg border border-blue-200 px-3 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50">Add lesson</button>
+            </div>
+            {lessons.map((lesson, index) => (
+              <div key={index} className="grid gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4 md:grid-cols-2">
+                <div className="flex items-center justify-between md:col-span-2"><h3 className="font-medium text-gray-900">Lesson {index + 1}</h3>{lessons.length > 1 && <button type="button" onClick={() => setLessons((current) => current.filter((_, lessonIndex) => lessonIndex !== index))} className="text-sm text-red-600 hover:text-red-700">Remove</button>}</div>
+                <input required={!lesson.title} placeholder="Lesson title" value={lesson.title} onChange={(event) => setLessons((current) => current.map((item, lessonIndex) => lessonIndex === index ? { ...item, title: event.target.value } : item))} className="rounded-lg border p-3" />
+                <input placeholder="Lesson duration (e.g. 20 min)" value={lesson.duration} onChange={(event) => setLessons((current) => current.map((item, lessonIndex) => lessonIndex === index ? { ...item, duration: event.target.value } : item))} className="rounded-lg border p-3" />
+                <textarea placeholder="Lesson description" value={lesson.description} onChange={(event) => setLessons((current) => current.map((item, lessonIndex) => lessonIndex === index ? { ...item, description: event.target.value } : item))} className="min-h-20 rounded-lg border p-3" />
+                <input required type="url" placeholder="Video URL" value={lesson.videoUrl} onChange={(event) => setLessons((current) => current.map((item, lessonIndex) => lessonIndex === index ? { ...item, videoUrl: event.target.value } : item))} className="rounded-lg border p-3" />
+              </div>
+            ))}
+          </div>
+          <button type="submit" className="rounded-lg bg-green-600 px-4 py-3 font-semibold text-white hover:bg-green-700 md:col-span-2">Publish Tutorial</button>
         </form>
       )}
       <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
