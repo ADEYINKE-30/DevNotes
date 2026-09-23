@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <section className="mx-auto flex min-h-[70vh] max-w-md flex-col justify-center px-6 py-12">
+    <section className="mx-auto flex min-h-full max-w-md flex-col justify-center px-6 py-12">
       <h1 className="text-3xl font-bold text-center text-white">Sign In</h1>
       <p className="mt-2 text-center text-slate-400">
         Welcome back to DevNotes

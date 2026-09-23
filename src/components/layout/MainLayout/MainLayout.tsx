@@ -14,6 +14,7 @@ const MainLayout = () => {
 
   // Pages that should not show the sidebar
   const noSidebarPages = ["/login", "/register", "/contact", "/about"];
+  const noFooterPages = ["/login", "/register"];
   const showSidebar = !noSidebarPages.includes(location.pathname);
 
   return (
@@ -36,7 +37,7 @@ const MainLayout = () => {
         </main>
 
         {/* Footer - only show on non-dashboard pages */}
-        {!showSidebar && <Footer />}
+        {!showSidebar && !noFooterPages.includes(location.pathname) && <Footer />}
       </div>
 
       {/* Floating AI Chat Toggle Button with label */}
