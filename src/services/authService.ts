@@ -5,6 +5,7 @@ export interface User {
   name: string;
   email: string;
   role: 'user' | 'admin';
+  status?: 'active' | 'suspended';
   avatar?: string;
   bio?: string;
   createdAt: string;
@@ -28,6 +29,25 @@ export interface AuthResponse {
 }
 
 export const authService = {
+  async getUsers(): Promise<User[]> {
+    const response = await apiClient.get<User[] | { users: User[] }>('/admin/users', true);
+    if (response.success && response.data) {
+      return Array.isArray(response.data) ? response.data : response.data.users;
+    }
+    throw new Error(response.message || 'Failed to fetch users');
+  },
+
+  async updateUser(userId: string, data: { name?: string; email?: string; role?: User['role'] }): Promise<User> {
+    const response = await apiClient.put<User>(`/admin/users/${userId}`, data, true);
+    if (response.success && response.data) return response.data;
+    throw new Error(response.message || 'Failed to update user');
+  },
+
+  async updateUserStatus(userId: string, status: 'active' | 'suspended'): Promise<User> {
+    const response = await apiClient.patch<User>(`/admin/users/${userId}`, { status }, true);
+    if (response.success && response.data) return response.data;
+    throw new Error(response.message || 'Failed to update user status');
+  },
   /**
    * Register a new user
    */

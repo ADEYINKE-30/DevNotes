@@ -75,6 +75,42 @@ export interface QuizzesResponse {
 }
 
 export const quizService = {
+  async updateQuiz(
+    quizId: string,
+    data: Partial<Pick<Quiz, "tutorial" | "title" | "description" | "passingScore" | "timeLimit" | "published">>,
+  ): Promise<Quiz> {
+    const response = await apiClient.put<Quiz>(`/quizzes/${quizId}`, data, true);
+    if (response.success && response.data) return response.data;
+    throw new Error(response.message || "Failed to update quiz");
+  },
+
+  async updateQuestion(
+    quizId: string,
+    questionId: string,
+    data: Partial<Omit<QuizQuestion, "_id" | "quiz">>,
+  ): Promise<QuizQuestion> {
+    const response = await apiClient.put<QuizQuestion>(
+      `/quizzes/${quizId}/questions/${questionId}`,
+      data,
+      true,
+    );
+    if (response.success && response.data) return response.data;
+    throw new Error(response.message || "Failed to update quiz question");
+  },
+
+  async deleteQuiz(quizId: string): Promise<void> {
+    const response = await apiClient.delete<void>(`/quizzes/${quizId}`, true);
+    if (!response.success) throw new Error(response.message || "Failed to delete quiz");
+  },
+
+  async deleteQuestion(quizId: string, questionId: string): Promise<void> {
+    const response = await apiClient.delete<void>(
+      `/quizzes/${quizId}/questions/${questionId}`,
+      true,
+    );
+    if (!response.success) throw new Error(response.message || "Failed to delete quiz question");
+  },
+
     async createQuiz(data: {
       tutorial: string;
       title: string;
