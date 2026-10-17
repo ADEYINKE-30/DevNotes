@@ -17,7 +17,6 @@ const LoadingSpinner = ({ label, size = "md" }: LoadingSpinnerProps) => {
         className={`${spinnerSize} animate-spin rounded-full border-slate-200 border-t-blue-600 dark:border-slate-700 dark:border-t-blue-400`}
         aria-hidden="true"
       />
-      {label && <span className="text-sm text-slate-600 dark:text-slate-400">{label}</span>}
     </div>
   );
 };

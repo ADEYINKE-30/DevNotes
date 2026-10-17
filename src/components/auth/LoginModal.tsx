@@ -123,10 +123,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? (
-              <span className="flex items-center justify-center gap-2">
-                <LoadingSpinner size="sm" />
-                Please wait...
-              </span>
+              <LoadingSpinner size="sm" label="Signing in" />
             )
               : isLogin
                 ? "Sign In"

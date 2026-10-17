@@ -39,10 +39,7 @@ const ChatInput = ({ onSend, disabled, placeholder = "Ask anything..." }: ChatIn
         className="rounded-lg bg-purple-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {disabled ? (
-          <span className="flex items-center gap-2">
-            <LoadingSpinner size="sm" />
-            Sending
-          </span>
+          <LoadingSpinner size="sm" label="Sending" />
         ) : (
           "Send"
         )}

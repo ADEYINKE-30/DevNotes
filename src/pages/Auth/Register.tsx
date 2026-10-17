@@ -106,10 +106,7 @@ const Register = () => {
           className="w-full rounded-lg bg-gradient-to-r from-purple-600 to-violet-600 px-6 py-3 font-semibold text-white transition hover:from-purple-700 hover:to-violet-700 disabled:from-purple-400 disabled:to-violet-400 disabled:cursor-not-allowed"
         >
           {loading ? (
-            <span className="flex items-center justify-center gap-2">
-              <LoadingSpinner size="sm" />
-              Creating account...
-            </span>
+            <LoadingSpinner size="sm" label="Creating account" />
           ) : (
             "Create Account"
           )}
