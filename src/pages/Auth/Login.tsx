@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -76,7 +77,14 @@ const Login = () => {
           disabled={loading}
           className="w-full rounded-lg bg-gradient-to-r from-purple-600 to-violet-600 px-6 py-3 font-semibold text-white transition hover:from-purple-700 hover:to-violet-700 disabled:from-purple-400 disabled:to-violet-400 disabled:cursor-not-allowed"
         >
-          {loading ? "Signing in..." : "Sign In"}
+          {loading ? (
+            <span className="flex items-center justify-center gap-2">
+              <LoadingSpinner size="sm" />
+              Signing in...
+            </span>
+          ) : (
+            "Sign In"
+          )}
         </button>
       </form>
 

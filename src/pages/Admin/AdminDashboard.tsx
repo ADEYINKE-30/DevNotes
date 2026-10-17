@@ -5,6 +5,7 @@ import { tutorialService, type Tutorial } from "../../services/tutorialService";
 import { quizService, type Quiz } from "../../services/quizService";
 import { communityService } from "../../services/communityService";
 import type { Discussion } from "../../types/community";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -46,28 +47,28 @@ const AdminDashboard = () => {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Total Articles"
-          value={loading ? "..." : posts.length}
+          value={loading ? <LoadingSpinner size="sm" /> : posts.length}
           icon="articles"
           change="Published content"
           href="/admin/articles"
         />
         <StatsCard
           title="Tutorials"
-          value={loading ? "..." : tutorials.length}
+          value={loading ? <LoadingSpinner size="sm" /> : tutorials.length}
           icon="videos"
           change="Learning content"
           href="/admin/videos"
         />
         <StatsCard
           title="Quizzes"
-          value={loading ? "..." : quizzes.length}
+          value={loading ? <LoadingSpinner size="sm" /> : quizzes.length}
           icon="quizzes"
           change="Assessment content"
           href="/admin/quizzes"
         />
         <StatsCard
           title="Discussions"
-          value={loading ? "..." : discussions.length}
+          value={loading ? <LoadingSpinner size="sm" /> : discussions.length}
           icon="community"
           change="Community threads"
           href="/community"

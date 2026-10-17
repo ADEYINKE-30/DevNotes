@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { authService, type User } from "../../services/authService";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 type UserForm = { name: string; email: string; role: User["role"] };
 
@@ -107,7 +108,7 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {loading && <tr><td colSpan={6} className="px-6 py-8 text-center text-sm text-gray-500">Loading users...</td></tr>}
+            {loading && <tr><td colSpan={6} className="px-6 py-8"><LoadingSpinner label="Loading users..." /></td></tr>}
             {!loading && users.length === 0 && <tr><td colSpan={6} className="px-6 py-8 text-center text-sm text-gray-500">No users found.</td></tr>}
             {!loading && users.map((user) => {
               const suspended = user.status === "suspended";

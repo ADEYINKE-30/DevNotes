@@ -1,8 +1,9 @@
 import { BarChart3, BookOpen, Eye, MessageSquare, TrendingDown, UserPlus, Users, Video } from "lucide-react";
+import type { ReactNode } from "react";
 
 interface StatsCardProps {
   title: string;
-  value: string | number;
+  value: ReactNode;
   icon: string;
   change?: string;
   changeType?: "positive" | "negative" | "neutral";

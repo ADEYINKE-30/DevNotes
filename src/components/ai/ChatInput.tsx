@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -38,10 +39,9 @@ const ChatInput = ({ onSend, disabled, placeholder = "Ask anything..." }: ChatIn
         className="rounded-lg bg-purple-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {disabled ? (
-          <span className="flex items-center gap-1">
-            <span className="h-2 w-2 animate-bounce rounded-full bg-white" />
-            <span className="h-2 w-2 animate-bounce rounded-full bg-white delay-100" />
-            <span className="h-2 w-2 animate-bounce rounded-full bg-white delay-200" />
+          <span className="flex items-center gap-2">
+            <LoadingSpinner size="sm" />
+            Sending
           </span>
         ) : (
           "Send"

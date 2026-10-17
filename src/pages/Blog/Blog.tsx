@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import BlogCard from "../../components/blog/BlogCard";
 import CategoryFilter from "../../components/blog/CategoryFilter";
 import { blogService, type BlogPost } from "../../services/blogService";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,7 +52,9 @@ const Blog = () => {
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Articles</h1>
-          <p className="mt-8 text-slate-600 dark:text-slate-400">Loading articles...</p>
+          <div className="mt-8">
+            <LoadingSpinner label="Loading articles..." />
+          </div>
         </div>
       </section>
     );

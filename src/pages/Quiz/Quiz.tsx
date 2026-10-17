@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import QuizQuestion from "../../components/quiz/QuizQuestion";
 import QuizResult from "../../components/quiz/QuizResult";
 import QuizHistory from "../../components/quiz/QuizHistory";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { quizService, type Quiz as QuizType, type QuizQuestion as QuizQuestionType } from "../../services/quizService";
 
 type QuizPhase = "start" | "in-progress" | "result";
@@ -166,7 +167,7 @@ const Quiz = () => {
     return (
       <section className="mx-auto max-w-4xl px-6 py-12">
         <div className="rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm">
-          <p className="text-gray-600">Loading{quizId ? ' quiz' : ' quizzes'}...</p>
+          <LoadingSpinner label={`Loading${quizId ? " quiz" : " quizzes"}...`} />
         </div>
       </section>
     );

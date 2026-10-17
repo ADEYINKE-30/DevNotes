@@ -1,5 +1,6 @@
 import { useEffect, useState, type FC } from "react";
 import { notificationService, type Notification } from "../../../services/notificationService";
+import LoadingSpinner from "../../common/LoadingSpinner";
 
 const formatNotificationTime = (createdAt: string) => {
   const elapsed = Date.now() - new Date(createdAt).getTime();
@@ -73,7 +74,9 @@ const Notifications: FC<{ open: boolean; onClose: () => void }> = ({ open, onClo
 
       <div className="max-h-64 overflow-y-auto">
         {loading ? (
-          <div className="px-4 py-6 text-center text-sm text-content-muted">Loading notifications...</div>
+          <div className="px-4 py-6">
+            <LoadingSpinner label="Loading notifications..." />
+          </div>
         ) : notifications.map((n) => (
           <div
             key={n._id}

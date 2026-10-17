@@ -5,6 +5,7 @@ import ArticleContent from "../../components/blog/ArticleContent";
 import BookmarkButton from "../../components/blog/BookmarkButton";
 import LikeButton from "../../components/blog/LikeButton";
 import ShareButton from "../../components/blog/ShareButton";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const BlogDetails = () => {
   const { slug } = useParams();
@@ -41,7 +42,7 @@ const BlogDetails = () => {
           ← Back to Blog
         </Link>
         <div className="text-center py-12">
-          <p className="text-gray-600">Loading article...</p>
+          <LoadingSpinner label="Loading article..." />
         </div>
       </section>
     );

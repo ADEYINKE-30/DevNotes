@@ -5,6 +5,7 @@ import { useAIChat } from "../../hooks/useAIChat";
 import { aiService } from "../../services/aiService";
 import type { AISuggestion } from "../../services/aiService";
 import { Bot, RotateCcw, X } from "lucide-react";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 interface AIChatProps {
   isFullPage?: boolean;
@@ -87,11 +88,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
             {isTyping && (
               <div className="flex justify-start">
                 <div className="rounded-2xl rounded-bl-sm bg-slate-100 dark:bg-slate-800 px-4 py-3">
-                  <div className="flex gap-1">
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400 dark:bg-slate-500" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400 dark:bg-slate-500 delay-100" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400 dark:bg-slate-500 delay-200" />
-                  </div>
+                  <LoadingSpinner size="sm" />
                 </div>
               </div>
             )}
@@ -163,11 +160,7 @@ const AIChat = ({ isFullPage = false, onClose }: AIChatProps) => {
         {isTyping && (
           <div className="flex justify-start">
             <div className="rounded-2xl rounded-bl-sm bg-slate-100 dark:bg-slate-800 px-4 py-3">
-              <div className="flex gap-1">
-                <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400 dark:bg-slate-500" />
-                <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400 dark:bg-slate-500 delay-100" />
-                <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400 dark:bg-slate-500 delay-200" />
-              </div>
+              <LoadingSpinner size="sm" />
             </div>
           </div>
         )}

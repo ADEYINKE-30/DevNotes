@@ -6,6 +6,7 @@ import { tutorialService } from "../../services/tutorialService";
 import { quizService } from "../../services/quizService";
 import ProgressCard from "../../components/dashboard/ProgressCard";
 import StreakTracker from "../../components/dashboard/StreakTracker";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import type { StreakData } from "../../data/mockProgress";
 
 const Dashboard = () => {
@@ -65,7 +66,9 @@ const Dashboard = () => {
           <h1 className="text-4xl font-bold">
             Welcome back, {user?.name || user?.email?.split("@")[0] || "Developer"}
           </h1>
-          <p className="mt-8 text-gray-600">Loading your dashboard...</p>
+          <div className="mt-8">
+            <LoadingSpinner label="Loading your dashboard..." />
+          </div>
         </div>
       </section>
     );

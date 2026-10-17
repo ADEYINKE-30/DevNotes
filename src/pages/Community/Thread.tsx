@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import CommentSection from "../../components/community/CommentSection";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { useAuth } from "../../hooks/useAuth";
 import { communityService } from "../../services/communityService";
 import type { Comment, Discussion, UpdateDiscussionData } from "../../types/community";
@@ -110,7 +111,11 @@ const Thread = () => {
   };
 
   if (loading) {
-    return <section className="mx-auto max-w-4xl px-6 py-20 text-center">Loading discussion...</section>;
+    return (
+      <section className="mx-auto max-w-4xl px-6 py-20 text-center">
+        <LoadingSpinner label="Loading discussion..." />
+      </section>
+    );
   }
 
   if (!discussion) {

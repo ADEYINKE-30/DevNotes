@@ -1,6 +1,7 @@
 import type { SearchResult } from "../../data/mockSearchData";
 import SearchResultCard from "./SearchResultCard";
 import { Search as SearchIcon } from "lucide-react";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 interface SearchResultsProps {
   results: SearchResult[];
@@ -13,12 +14,7 @@ const SearchResults = ({ results, query, isLoading, onResultClick }: SearchResul
   if (isLoading) {
     return (
       <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-lg">
-        <div className="flex items-center justify-center gap-2">
-          <div className="h-2 w-2 animate-bounce rounded-full bg-blue-500" />
-          <div className="h-2 w-2 animate-bounce rounded-full bg-blue-500 delay-100" />
-          <div className="h-2 w-2 animate-bounce rounded-full bg-blue-500 delay-200" />
-          <span className="ml-2 text-sm text-gray-500">Searching...</span>
-        </div>
+        <LoadingSpinner label="Searching..." />
       </div>
     );
   }

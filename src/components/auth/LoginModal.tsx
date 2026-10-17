@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -121,8 +122,12 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
             disabled={loading}
             className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {loading
-              ? "Please wait..."
+            {loading ? (
+              <span className="flex items-center justify-center gap-2">
+                <LoadingSpinner size="sm" />
+                Please wait...
+              </span>
+            )
               : isLogin
                 ? "Sign In"
                 : "Create Account"}

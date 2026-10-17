@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import PostCard from "../../components/community/PostCard";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { useAuth } from "../../hooks/useAuth";
 import { communityService } from "../../services/communityService";
 import type { Discussion } from "../../types/community";
@@ -201,7 +202,7 @@ const Community = () => {
 
       {loading ? (
         <div className="py-20 text-center">
-          <p className="text-lg text-gray-500">Loading discussions...</p>
+          <LoadingSpinner label="Loading discussions..." />
         </div>
       ) : error ? (
         <div className="py-20 text-center">

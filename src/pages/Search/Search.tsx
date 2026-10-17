@@ -5,6 +5,7 @@ import SearchResultCard from "../../components/search/SearchResultCard";
 import { Search as SearchIcon } from "lucide-react";
 import { searchService } from "../../services/searchService";
 import type { SearchResult } from "../../data/mockSearchData";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
@@ -48,12 +49,7 @@ const Search = () => {
         <div className="mt-8">
           {isLoading ? (
             <div className="flex items-center justify-center py-20">
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 animate-bounce rounded-full bg-blue-500" />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-blue-500 delay-100" />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-blue-500 delay-200" />
-                <span className="ml-2 text-sm text-gray-500">Searching...</span>
-              </div>
+              <LoadingSpinner label="Searching..." />
             </div>
           ) : results.length > 0 ? (
             <div>
