@@ -73,7 +73,6 @@ const ManageUsers = () => {
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Manage Users</h1>
-        <p className="mt-1 text-sm text-gray-500">View and manage registered users from the admin API.</p>
       </div>
 
       {message && <p className="mb-4 rounded-lg bg-blue-50 p-3 text-sm text-blue-700">{message}</p>}
