@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import SearchBar from "../../search/SearchBar";
 import UserMenu from "../../auth/UserMenu";
 import Notifications from "./Notifications.tsx";
@@ -59,6 +60,14 @@ const Header = ({ onMenuClick }: HeaderProps) => {
           >
             <Menu aria-hidden="true" className="h-5 w-5" />
           </button>
+          <Link
+            to="/"
+            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-control bg-accent font-bold text-white transition-colors hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus md:hidden"
+            aria-label="DevNotes home"
+            title="DevNotes home"
+          >
+            D
+          </Link>
           <div className="min-w-0 max-w-md flex-1">
             <SearchBar />
           </div>
