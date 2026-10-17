@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { BookOpen, Bookmark, Brain, ChevronLeft, Home, MessageSquare, Settings, Shield, Sparkles, User, Users, Video } from "lucide-react";
@@ -51,8 +51,15 @@ const Sidebar = ({ isOpen = true, onClose }: SidebarProps) => {
       >
         {/* Logo Section */}
         <div className="flex min-h-20 items-center justify-between border-b border-line px-4 py-4">
-          <div className={`flex items-center gap-3 ${collapsed ? "justify-center w-full" : ""}`}>
-            <div className="flex h-8 w-8 items-center justify-center rounded-control bg-accent text-white font-bold">
+          <Link
+            to="/"
+            onClick={onClose}
+            className={`flex items-center gap-3 rounded-control focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus ${
+              collapsed ? "w-full justify-center" : ""
+            }`}
+            aria-label="DevNotes home"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-control bg-accent font-bold text-white">
               D
             </div>
             {!collapsed && (
@@ -61,7 +68,7 @@ const Sidebar = ({ isOpen = true, onClose }: SidebarProps) => {
                 <p className="text-xs text-content-muted">Learn. Build. Share.</p>
               </div>
             )}
-          </div>
+          </Link>
           {!collapsed && (
             <button
               onClick={() => setCollapsed(!collapsed)}

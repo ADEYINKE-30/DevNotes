@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import VideoCard from "../../components/video/VideoCard";
 import CategoryFilter from "../../components/blog/CategoryFilter";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { tutorialService, type Tutorial } from "../../services/tutorialService";
 
 const Videos = () => {
@@ -51,7 +52,9 @@ const Videos = () => {
       <section className="mx-auto max-w-7xl px-6 py-12">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-slate-900 dark:text-white">Video Tutorials</h1>
-          <p className="mt-8 text-slate-600 dark:text-slate-400">Loading tutorials...</p>
+          <div className="mt-8">
+            <LoadingSpinner label="Loading tutorials..." />
+          </div>
         </div>
       </section>
     );
@@ -117,7 +120,7 @@ const Videos = () => {
                 instructor: tutorial.instructor,
                 category: tutorial.category,
                 thumbnail: tutorial.thumbnail || 'https://via.placeholder.com/640x360?text=Tutorial',
-                duration: `${tutorial.duration} min`,
+                duration: tutorial.duration,
                 description: tutorial.description,
                 youtubeId: '',
                 views: 0,

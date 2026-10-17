@@ -5,6 +5,7 @@ import FeaturedPosts from "../../components/home/FeaturedPosts";
 import LatestPosts from "../../components/home/LatestPosts";
 import Newsletter from "../../components/home/Newsletter";
 import Footer from "../../components/layout/Footer";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { tutorialService, type Tutorial } from "../../services/tutorialService";
 import { quizService, type Quiz } from "../../services/quizService";
 import { useAIContext } from "../../context/AIContext";
@@ -54,7 +55,11 @@ const Home = () => {
             <Link to="/videos" className="text-sm font-semibold text-accent transition-colors hover:text-accent-hover focus-visible:outline-none">Browse all tutorials <span aria-hidden="true">-&gt;</span></Link>
           </div>
 
-          {learningLoading && <p className="mt-8 text-sm text-content-muted">Loading learning paths...</p>}
+          {learningLoading && (
+            <div className="mt-8">
+              <LoadingSpinner label="Loading learning paths..." />
+            </div>
+          )}
           {learningError && <p className="mt-8 rounded-panel border border-line bg-canvas p-4 text-sm text-error">{learningError}</p>}
           {!learningLoading && !learningError && (
             <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(16rem,0.65fr)]">
@@ -70,7 +75,7 @@ const Home = () => {
                         {tutorial.thumbnail && <img src={tutorial.thumbnail} alt="" className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105" loading="lazy" />}
                       </div>
                       <div className="min-w-0">
-                        <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-content-muted"><span>{tutorial.category}</span><span>{tutorial.difficulty}</span><span>{tutorial.duration} min</span></div>
+                        <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-content-muted"><span>{tutorial.category}</span><span>{tutorial.difficulty}</span><span>{tutorial.duration}</span></div>
                         <h4 className="mt-2 text-lg font-semibold text-content transition-colors group-hover:text-accent">{tutorial.title}</h4>
                         <p className="mt-1 line-clamp-2 text-sm text-content-secondary">{tutorial.description}</p>
                       </div>

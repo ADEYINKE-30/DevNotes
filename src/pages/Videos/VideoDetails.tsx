@@ -4,6 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { tutorialService, type Tutorial, type Lesson } from "../../services/tutorialService";
 import VideoPlayer from "../../components/video/VideoPlayer";
 import WatchProgress from "../../components/video/WatchProgress";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const VideoDetails = () => {
   const { videoId } = useParams();
@@ -103,7 +104,7 @@ const VideoDetails = () => {
           ← Back to Videos
         </Link>
         <div className="text-center py-12">
-          <p className="text-gray-600">Loading tutorial...</p>
+          <LoadingSpinner label="Loading tutorial..." />
         </div>
       </section>
     );
@@ -230,7 +231,7 @@ const VideoDetails = () => {
                 </h1>
                 <div className="mt-2 flex flex-wrap items-center gap-4 text-sm text-gray-500">
                   <span>By {tutorial.instructor}</span>
-                  <span>{tutorial.duration} min</span>
+                  <span>{tutorial.duration}</span>
                   <span>{lessons.length} lessons</span>
                 </div>
               </div>
@@ -274,7 +275,7 @@ const VideoDetails = () => {
             <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
               <h3 className="text-lg font-bold text-gray-900">Course Content</h3>
               <p className="mt-1 text-sm text-gray-500">
-                {lessons.length} lessons • {tutorial.duration} min total
+                {lessons.length} lessons • {tutorial.duration} total
               </p>
 
               <div className="mt-4 space-y-2">
@@ -307,7 +308,7 @@ const VideoDetails = () => {
                             {lesson.title}
                           </h4>
                           <p className="text-xs text-gray-500 mt-1">
-                            {lesson.duration} min
+                            {lesson.duration}
                           </p>
                         </div>
                       </div>
